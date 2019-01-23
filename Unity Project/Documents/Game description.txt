@@ -1,0 +1,127 @@
+ The whole idea of the game
+ _____________________________________
+ 
+ You are in control of a busy traffic movement in New York city.
+ Your main goal is to avoid traffic and help all of the cars to reach their destination.
+ You control the cars movement by clicking on them with your mouse (Mouse 1)
+ 
+How do you earn points/score?
+ _____________________________________
+ You gain a point for every succesful car that managed to reach its destination
+ (The destination is the outside area of the main camera)
+ 
+ You gain points for every succesful bus stop, or every sucessful cross-walk
+ 
+How do you lose/fail the game?
+________________________________________
+You fail the game if any collision happens.
+For ex, if a car crashes into another car, if a car crashes into a bus, if a car crashes into a person, etc.
+Once this happens, the game shows an UI that shows the current score, highscore and a replay button. 
+ 
+
+
+
+
+Main Characters:
+
+1. Cars/Vehicles
+2. People(?)
+
+
+Cars
+-----------
+
+# movement
+===========
+
+ -> Cars will be having 1 top speed that they cannot exceed
+ -> Controls: Mouse 1 stops the car for few seconds.
+ -> The car takes some time to slow down and stop and takes some time to regain its original speed (top speed)
+ -> The cars might have lane switching.
+ 
+ # collisions
+ ==============
+ 
+ -> Cars colliding with other cars
+ -> Cars colliding with outside objects such as : people.
+ 
+
+Outside objects that effect the gameplay
+-----------
+
+# traffic lights
+
+ -> Stops the cars in a lane depending on the light
+ -> Stops the people form walking on the sidewalks.
+         - green means the cars can go and wont stop
+         - orange/yellow does nothing
+         - red stops all of the cars in the current lane
+
+# people
+
+ -> would walk on the sidewalks, cross the roads, get onto the bus.
+   
+# buses (?)
+
+ -> buses would carry people and let them out at specific marked locations on the roads.
+          - This would make the game harder to play as it would take few seconds 
+            for the bus to move and etc.
+ 
+ 
+ # bumps on the road
+ 
+ -> bumps would stop/reduce the speed of the car/bus
+ 
+ # cross - walks   
+ 
+  -> people would use them to cross depending on the traffic light that it would have at the moment 
+  
+  # rain
+  
+  -> rain would dcerease the speed of the cars but increase the amount of time it takes for the car to break and start going again
+  
+  # night time/day time
+  
+  -> night time would decrease the speed of the cars but increase the amount of time it takes for the car to break and start going again.
+  -> day time would increase the top speed of the cars but decrease the amount of time it takes for the car to break and start going again
+  
+  
+Environment objects (decorations)
+-----------  
+
+# buildings
+# birds(?)
+# trees
+# rain(?)
+# thunder
+# sun/moon(?)
+# wind(?)
+# benches
+# trash cans
+# bike lanes
+# lights/lamps
+
+Animations
+-----------
+
+# traffic lights (switching colors)
+# cars (the actual movment of the cars/vehicles, wheels, lights, breaking smoke, etc)
+# trees (trees moving from wind)
+# bird (birds flying across the screen, etc)
+# Movement in the buildings (movement in the windows, lights switching on and off, siluets walking, etc)
+# day/night changing (changes to the lighting of the game depending on the time of the day, day/night)
+# poeple walking/moving (General animation for people walking/stopping)
+# sun/moon movement animation
+# thunder animation
+# rain animation  
+# the animation of car headlights
+
+ Sounds
+-----------
+
+# Car engine sounds
+# Weather sounds (rain, wind, thunder)
+# Cars stopping/starting sounds
+# Cars tires sound
+# Collision sounds. (crash, etc)
+
