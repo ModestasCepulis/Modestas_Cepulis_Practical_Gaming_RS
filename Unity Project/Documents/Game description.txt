@@ -1,127 +1,155 @@
  The whole idea of the game
  _____________________________________
  
- You are in control of a busy traffic movement in New York city.
- Your main goal is to avoid traffic and help all of the cars to reach their destination.
- You control the cars movement by clicking on them with your mouse (Mouse 1)
+You are in control of a character that has a task of growing and regrowing plants and selling them to the 'town'.
+Player 1: W A S D is used for movement, and V would be used to interact with the objects/tasks.
+Player 2: I J K L is used for movement, and P would be used to interact with the objects/tasks.
+The game would have a co-op function (An additional controllabe character)
  
 How do you earn points/score?
  _____________________________________
- You gain a point for every succesful car that managed to reach its destination
- (The destination is the outside area of the main camera)
+You gain points for every succesful 'food' trip, or every succesful plant grown.
+(There is going to be a wagon that takes away the fully grown plants)
  
- You gain points for every succesful bus stop, or every sucessful cross-walk
  
 How do you lose/fail the game?
 ________________________________________
-You fail the game if any collision happens.
-For ex, if a car crashes into another car, if a car crashes into a bus, if a car crashes into a person, etc.
-Once this happens, the game shows an UI that shows the current score, highscore and a replay button. 
+You fail the game if you run out of seeds or you fail to supply any fully frown plants to the 'wagon'.
  
-
-
-
 
 Main Characters:
 
-1. Cars/Vehicles
-2. People(?)
+1. Farmer (Player)
 
 
-Cars
+Methods/Classes
+-------------------
+
+Farmer
+
+PlayerController.cs
+ -> moveForward(float walkingSpeed)
+ -> moveBackwards(float walkingSpeed)
+ -> turnLeft(float turningSpeed)
+ -> turnRight(float turningSpeed)
+ -> useItem()
+ -> pickUpItem()
+ -> dropItem()
+ 
+ itemController.cs
+  -> itemCurrentlyEquipped()
+ 
+ Vehicles
+ 
+ WagonController.cs
+ -> wagonMovement(float movementSpeed)
+ -> tripTimer(float timeToStay)
+ -> awardItems()
+ 
+ Plants
+ 
+ PlantsController.cs
+ -> seedSpawner()
+ -> plantsGrowth() 
+ 
+ Birds
+ 
+ BirdController()
+ -> birdMovement(float movementSpeed)
+ -> attackPlants(float attackTime)
+  
+
+
+Farmer (Player)
 -----------
 
 # movement
 ===========
 
- -> Cars will be having 1 top speed that they cannot exceed
- -> Controls: Mouse 1 stops the car for few seconds.
- -> The car takes some time to slow down and stop and takes some time to regain its original speed (top speed)
- -> The cars might have lane switching.
+ -> Player will be having 1 top speed that they cannot exceed  (etc walkingSpeed)
+ -> Controls:
+ 
+ Player 1:
+ 
+  W A S D for movement (forward, backwards, left and right)
+  V would be used to interact with objects (water bucket, hoe, etc, taking items, putting them down)
+
+  Player 2:
+  
+  I J K L for movement (forward, backwards, left and right)
+  P would be used to interact with objects (water bucket, hoe, etc, taking items, putting them down)
  
  # collisions
  ==============
  
- -> Cars colliding with other cars
- -> Cars colliding with outside objects such as : people.
+ Players colliding with each other, colliding with objects.
+ (Plants, water supply units, etc.)
  
 
 Outside objects that effect the gameplay
 -----------
 
-# traffic lights
+# Spots for plants to grow
 
- -> Stops the cars in a lane depending on the light
- -> Stops the people form walking on the sidewalks.
-         - green means the cars can go and wont stop
-         - orange/yellow does nothing
-         - red stops all of the cars in the current lane
+ -> The game would have a 3x3 or 9x9 or 12x12 spots where the players could grow their plants.
+ 
+ 
 
-# people
+# Wagon
 
- -> would walk on the sidewalks, cross the roads, get onto the bus.
+ -> The main 'vehicle' of the game which would transfer the objects(plants) from the players to its own area.
+ -> The wagon would have a timer. (It would stay in the area for a set period of time, then move outside of the screen and come back again)
+    (This would implement that the plants are being taken away to the town and the players would get awarded with points/prizes)
    
-# buses (?)
+# Well
 
- -> buses would carry people and let them out at specific marked locations on the roads.
-          - This would make the game harder to play as it would take few seconds 
-            for the bus to move and etc.
+ -> a 'Well' that would provide a source of water for the players to use and water the plants.
  
  
- # bumps on the road
+ # Birds
  
- -> bumps would stop/reduce the speed of the car/bus
+ -> An AI that would and try to destroy the plants in some way or another
+    (The player would need to interact with the birds in order to 'scare' them away)
+ -> Birds would move from one spot to another depending on where the plants would be growing.
  
- # cross - walks   
- 
-  -> people would use them to cross depending on the traffic light that it would have at the moment 
-  
   # rain
   
-  -> rain would dcerease the speed of the cars but increase the amount of time it takes for the car to break and start going again
+  -> rain would decrease the speed of the players and decrease the amount of times the plants/seeds need to be watered.
   
   # night time/day time
   
-  -> night time would decrease the speed of the cars but increase the amount of time it takes for the car to break and start going again.
-  -> day time would increase the top speed of the cars but decrease the amount of time it takes for the car to break and start going again
+  -> night time would increase the growth of the plants, decrease the number of birds that would spawn and decrease the amount of times the plants need to be watered.
+  -> day time would increase the growth of the plants, increase the number of birds that would spawn also increase the amount of times the plants need to be watered.
   
   
 Environment objects (decorations)
 -----------  
 
-# buildings
-# birds(?)
+# bushes
 # trees
 # rain(?)
 # thunder
 # sun/moon(?)
 # wind(?)
-# benches
-# trash cans
-# bike lanes
-# lights/lamps
 
 Animations
 -----------
 
-# traffic lights (switching colors)
-# cars (the actual movment of the cars/vehicles, wheels, lights, breaking smoke, etc)
+# Player movement (Animations for the player movement)
+# Plants (seeds, seeds growing, mature plants)
 # trees (trees moving from wind)
 # bird (birds flying across the screen, etc)
-# Movement in the buildings (movement in the windows, lights switching on and off, siluets walking, etc)
 # day/night changing (changes to the lighting of the game depending on the time of the day, day/night)
-# poeple walking/moving (General animation for people walking/stopping)
 # sun/moon movement animation
 # thunder animation
 # rain animation  
-# the animation of car headlights
 
  Sounds
 -----------
 
-# Car engine sounds
+# Player walking sounds
 # Weather sounds (rain, wind, thunder)
-# Cars stopping/starting sounds
-# Cars tires sound
-# Collision sounds. (crash, etc)
+# Plants growing sounds (?)
+# Water sounds
+# Using tools sounds
 
