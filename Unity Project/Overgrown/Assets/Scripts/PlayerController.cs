@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,6 +15,8 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private float turningSpeed = 20f;
 
+    private float raycastRange = 2f;
+
     // Use this for initialization
     void Start () {
 
@@ -23,9 +26,37 @@ public class PlayerController : MonoBehaviour
 	// Update is called once per frame
 	void Update () {
 
+        isArrayHit();
+
         IsMoving();
 		
 	}
+
+    private void isArrayHit()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            Ray lookAt = new Ray(transform.position, transform.forward);
+            Debug.DrawRay(lookAt.origin, 10 * lookAt.direction);
+            RaycastHit info;
+
+            //the Array only works if it is in the range of 'raycastRange'
+            if (Physics.Raycast(lookAt, raycastRange))
+            {
+                //if the raycast hits something.
+                if (Physics.Raycast(lookAt, out info))
+                {
+                    PlantsController plant = info.collider.GetComponent<PlantsController>();
+                    if (plant)//if it has the script 'PlantsController' do this
+                    {
+                        plant.TypeOfPlant();
+
+                    }
+                }
+            }
+
+        }
+    }
 
     /// <summary>
     /// Moves forward by certain speed/units per second
@@ -34,7 +65,8 @@ public class PlayerController : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.W))
         {
-            transform.Translate(Vector3.forward * walkingSpeed * Time.deltaTime);
+            transform.position += Vector3.forward * walkingSpeed * Time.deltaTime;
+            transform.rotation = Quaternion.LookRotation(Vector3.forward);
         }
         
     }
@@ -46,7 +78,8 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.S))
         {
-            transform.Translate(Vector3.back * walkingSpeed * Time.deltaTime);
+            transform.position += (Vector3.back * walkingSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.LookRotation(Vector3.back);
         }
 
     }
@@ -58,7 +91,8 @@ public class PlayerController : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.A))
         {
-            transform.Translate(Vector3.left * turningSpeed * Time.deltaTime);
+            transform.position+= (Vector3.left * turningSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.LookRotation(Vector3.left);
         }
     }
 
@@ -69,8 +103,8 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.D))
         {
-            transform.Translate(Vector3.right * turningSpeed * Time.deltaTime);
-
+            transform.position += (Vector3.right * turningSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.LookRotation(Vector3.right);
         }
     }
 
@@ -105,16 +139,16 @@ public class PlayerController : MonoBehaviour
         moveBackwards();
         turnLeft();
         turnRight();
+
+
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collision other)
     {
+        print("Here");
         if (other.gameObject.tag == "Seeds")
         {
-           if(Input.GetKeyDown(KeyCode.Space))
-            {
-                print("You just picked up some seeds");
-            }
+
                   
         }
     }

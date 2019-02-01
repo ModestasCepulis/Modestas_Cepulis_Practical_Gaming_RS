@@ -1,8 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlantsController : MonoBehaviour {
+
+    public string PlantType;
+    private float numbersOfSeedsCarry;
 
 	// Use this for initialization
 	void Start () {
@@ -28,5 +32,30 @@ public class PlantsController : MonoBehaviour {
     private void plantsGrowth()
     {
         throw new System.NotImplementedException();
+    }
+
+    internal void TypeOfPlant()
+    {
+
+        while (numbersOfSeedsCarry == 0)
+        {
+            if (PlantType == "Tomato")
+            {
+                numbersOfSeedsCarry = 1;
+                print("You picked up a tomato");
+                puttingSeedsDown();
+            }
+
+            if (PlantType == "Potato")
+            {
+                numbersOfSeedsCarry = 1;
+                print("You picked up a potato");
+            }
+        }
+    }
+
+    private void puttingSeedsDown()
+    {
+      
     }
 }
