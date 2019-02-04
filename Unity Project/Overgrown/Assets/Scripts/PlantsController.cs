@@ -36,22 +36,19 @@ public class PlantsController : MonoBehaviour {
 
     internal void TypeOfPlant()
     {
-
-        while (numbersOfSeedsCarry == 0)
-        {
+       
             if (PlantType == "Tomato")
             {
-                numbersOfSeedsCarry = 1;
+                numbersOfSeedsCarry++;
                 print("You picked up a tomato");
                 puttingSeedsDown();
             }
 
             if (PlantType == "Potato")
             {
-                numbersOfSeedsCarry = 1;
+                numbersOfSeedsCarry++;
                 print("You picked up a potato");
             }
-        }
     }
 
     private void puttingSeedsDown()

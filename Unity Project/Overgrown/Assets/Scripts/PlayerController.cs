@@ -143,17 +143,5 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    void OnCollisionEnter(Collision other)
-    {
-        print("Here");
-        if (other.gameObject.tag == "Seeds")
-        {
-
-                  
-        }
-    }
-
-    //checks if the player colides with an object that has a specific gamer tag.
-
 
 }
