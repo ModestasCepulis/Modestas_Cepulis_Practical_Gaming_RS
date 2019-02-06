@@ -11,17 +11,8 @@ public class GameManager : MonoBehaviour {
 	void Start () {
 
 
-
+        /*
         seedsTest = GameObject.Find("Seeds");
-
- 
-
-
-    }
-
-    // Update is called once per frame
-    void Update () {
-
         if (counting == 1)
         {
             var newPosition = new Vector3(7, 1, 1);
@@ -29,6 +20,15 @@ public class GameManager : MonoBehaviour {
             var newObject = Instantiate(seedsTest, newPosition, newRotation);
             counting = 2;
         }
+        */
+
+
+    }
+
+    // Update is called once per frame
+    void Update () {
+
+        
 
     }
 }

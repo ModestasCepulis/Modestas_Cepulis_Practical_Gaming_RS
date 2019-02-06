@@ -3,20 +3,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlantsController : MonoBehaviour {
+public class PlantsController : MonoBehaviour
+{
+    internal enum PlantType  {Potatoe, Tomatoe };
+    PlantType thisPlant;
+    private Boolean carryingAnItem = false;
+    private string ItemCurrentlyCarried;
 
-    public string PlantType;
-    private float numbersOfSeedsCarry;
+    // Use this for initialization
+    void Start()
+    {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 
     /// <summary>
     /// Controls the spawns for the seeds
@@ -36,23 +40,45 @@ public class PlantsController : MonoBehaviour {
 
     internal void TypeOfPlant()
     {
-       
+        while (!carryingAnItem)
+        {
             if (PlantType == "Tomato")
             {
-                numbersOfSeedsCarry++;
                 print("You picked up a tomato");
-                puttingSeedsDown();
+                ItemCurrentlyCarried = "Tomato";
+                carryingAnItem = true;
+        
             }
 
             if (PlantType == "Potato")
             {
-                numbersOfSeedsCarry++;
                 print("You picked up a potato");
+                ItemCurrentlyCarried = "Tomato";
+                carryingAnItem = true;
             }
+        }
     }
 
-    private void puttingSeedsDown()
+    internal void puttingSeedsDown()
     {
-      
+        if (PlantType == "Dirt")
+        {
+            if (ItemCurrentlyCarried == "Tomato")
+            {
+                print("You just planted a tomato seed");
+                carryingAnItem = false;
+            }
+            if (ItemCurrentlyCarried == "Potato")
+            {
+                print("You just planted a potato seed");
+                carryingAnItem = false;
+            }
+        }
+
+    }
+
+    internal PlantType pickUp()
+    {
+        return thisPlant;
     }
 }

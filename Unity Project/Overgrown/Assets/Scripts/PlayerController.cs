@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 
-{
+{   internal enum InHand { Empty, Potatoe_Seeds, Tomatoe_Seeds,Water, Potatoes, Tomatoes}
+
+    InHand currently_Holding = InHand.Empty;
     /// <summary>
     /// The walking speed of the character
     /// </summary>
@@ -26,16 +28,24 @@ public class PlayerController : MonoBehaviour
 	// Update is called once per frame
 	void Update () {
 
-        isArrayHit();
+        if (Input.GetKey(KeyCode.W))
+        {
+            moveForward();
+        }
 
-        IsMoving();
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+
+            Interact();
+        }
+   
 		
 	}
 
-    private void isArrayHit()
+    private void Interact()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
+   
             Ray lookAt = new Ray(transform.position, transform.forward);
             Debug.DrawRay(lookAt.origin, 10 * lookAt.direction);
             RaycastHit info;
@@ -49,13 +59,32 @@ public class PlayerController : MonoBehaviour
                     PlantsController plant = info.collider.GetComponent<PlantsController>();
                     if (plant)//if it has the script 'PlantsController' do this
                     {
-                        plant.TypeOfPlant();
+                    if (currently_Holding == InHand.Empty)
+                    {
+                        PlantsController.PlantType pickingUP = plant.pickUp();
 
+                        switch (pickingUP)
+                        {
+                            case PlantsController.PlantType.Potatoe:
+                                currently_Holding = InHand.Potatoe_Seeds;
+                                break;
+                            case PlantsController.PlantType.Tomatoe:
+                                currently_Holding = InHand.Tomatoe_Seeds;
+                                break;
+                        }
                     }
+                }
+
+                     plotControl plot = info.collider.GetComponent<plotControl>();
+                if (plot)
+                {
+                    plot.Interact(currently_Holding);
+                }
+
                 }
             }
 
-        }
+        
     }
 
     /// <summary>
@@ -63,11 +92,10 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void moveForward()
     {
-        if(Input.GetKey(KeyCode.W))
-        {
+  
             transform.position += Vector3.forward * walkingSpeed * Time.deltaTime;
             transform.rotation = Quaternion.LookRotation(Vector3.forward);
-        }
+        
         
     }
 
