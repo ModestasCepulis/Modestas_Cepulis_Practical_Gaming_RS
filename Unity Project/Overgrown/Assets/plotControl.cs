@@ -34,10 +34,6 @@ public class plotControl : MonoBehaviour {
 
                 }
                 break;
-
-
-
-
         }
     }
 }

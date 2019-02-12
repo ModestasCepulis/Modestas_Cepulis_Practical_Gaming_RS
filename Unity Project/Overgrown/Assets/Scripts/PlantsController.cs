@@ -7,8 +7,6 @@ public class PlantsController : MonoBehaviour
 {
     internal enum PlantType  {Potatoe, Tomatoe };
     PlantType thisPlant;
-    private Boolean carryingAnItem = false;
-    private string ItemCurrentlyCarried;
 
     // Use this for initialization
     void Start()
@@ -40,40 +38,34 @@ public class PlantsController : MonoBehaviour
 
     internal void TypeOfPlant()
     {
-        while (!carryingAnItem)
-        {
-            if (PlantType == "Tomato")
+
+            if (thisPlant == PlantType.Tomatoe)
             {
                 print("You picked up a tomato");
-                ItemCurrentlyCarried = "Tomato";
-                carryingAnItem = true;
         
             }
 
-            if (PlantType == "Potato")
+            if (thisPlant == PlantType.Potatoe)
             {
                 print("You picked up a potato");
-                ItemCurrentlyCarried = "Tomato";
-                carryingAnItem = true;
             }
-        }
     }
 
     internal void puttingSeedsDown()
     {
-        if (PlantType == "Dirt")
-        {
-            if (ItemCurrentlyCarried == "Tomato")
-            {
-                print("You just planted a tomato seed");
-                carryingAnItem = false;
-            }
-            if (ItemCurrentlyCarried == "Potato")
-            {
-                print("You just planted a potato seed");
-                carryingAnItem = false;
-            }
-        }
+        //if (PlantType == "Dirt")
+        //{
+        //    if (ItemCurrentlyCarried == "Tomato")
+        //    {
+        //        print("You just planted a tomato seed");
+        //        carryingAnItem = false;
+        //    }
+        //    if (ItemCurrentlyCarried == "Potato")
+        //    {
+        //        print("You just planted a potato seed");
+        //        carryingAnItem = false;
+        //    }
+        //}
 
     }
 

@@ -33,15 +33,28 @@ public class PlayerController : MonoBehaviour
             moveForward();
         }
 
+        if (Input.GetKey(KeyCode.S))
+        {
+            moveBackwards();
+        }
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            moveLeft();
+        }
+
+        if (Input.GetKey(KeyCode.D))
+        {
+            moveRight();
+        }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
 
             Interact();
         }
-   
-		
-	}
+
+    }
 
     private void Interact()
     {
@@ -115,25 +128,19 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// Turns left by a certain turning speed
     /// </summary>
-    private void turnLeft()
-    {
-        if(Input.GetKey(KeyCode.A))
-        {
+    private void moveLeft()
+    {     
             transform.position+= (Vector3.left * turningSpeed * Time.deltaTime);
             transform.rotation = Quaternion.LookRotation(Vector3.left);
-        }
     }
 
     /// <summary>
     /// Turns right by a certain turning speed
     /// </summary>
-    private void turnRight()
-    {
-        if (Input.GetKey(KeyCode.D))
-        {
+    private void moveRight()
+    {     
             transform.position += (Vector3.right * turningSpeed * Time.deltaTime);
             transform.rotation = Quaternion.LookRotation(Vector3.right);
-        }
     }
 
     /// <summary>
@@ -158,17 +165,6 @@ public class PlayerController : MonoBehaviour
     private void dropItem()
     {
        
-    }
-
-    //calls the movement methods in update method
-    private void IsMoving()
-    {
-        moveForward();
-        moveBackwards();
-        turnLeft();
-        turnRight();
-
-
     }
 
 
