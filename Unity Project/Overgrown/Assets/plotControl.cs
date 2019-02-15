@@ -6,8 +6,8 @@ using UnityEngine;
 public class plotControl : MonoBehaviour {
 
 
-    enum PlotState { Empty, Potatoe_Seedling, Tomatoe_Seedling, etc}
-    PlotState plotIs = PlotState.Empty;
+    public enum PlotState { Empty, Potatoe_Seedling, Tomatoe_Seedling, etc}
+    public PlotState plotIs = PlotState.Empty;
 	// Use this for initialization
 	void Start () {
 		
@@ -15,6 +15,8 @@ public class plotControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+        print(plotIs);
 		
 	}
 
@@ -31,7 +33,14 @@ public class plotControl : MonoBehaviour {
                 if (plotIs == PlotState.Empty)
                 {
                     plotIs = PlotState.Potatoe_Seedling;
+                }
+                break;
 
+            case PlayerController.InHand.Tomatoe_Seeds:
+
+                if(plotIs == PlotState.Empty)
+                {
+                    plotIs = PlotState.Tomatoe_Seedling;
                 }
                 break;
         }

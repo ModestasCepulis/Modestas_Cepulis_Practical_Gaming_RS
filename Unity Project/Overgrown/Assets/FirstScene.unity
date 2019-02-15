@@ -667,12 +667,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fac57ed726710e34985843ca00984101, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tomatoeBarrel: {fileID: 1610139188889684, guid: c9c7ef3c68c57de4f9ee4ca996ae8027,
-    type: 2}
-  potatoeBarrel: {fileID: 1610139188889684, guid: c9c7ef3c68c57de4f9ee4ca996ae8027,
+  barrel: {fileID: 1610139188889684, guid: c9c7ef3c68c57de4f9ee4ca996ae8027, type: 2}
+  trashBarrel: {fileID: 1725835793901140, guid: fddc3e70d96a9084e86bf2666e32e021,
     type: 2}
   tomatoePosition: {fileID: 164815658}
   potatoePosition: {fileID: 844846321}
+  trashPosition: {fileID: 1071367312}
 --- !u!1 &309876804
 GameObject:
   m_ObjectHideFlags: 0
@@ -1091,7 +1091,7 @@ GameObject:
   - component: {fileID: 687174492}
   - component: {fileID: 687174487}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Player1
   m_TagString: Untagged
   m_Icon: {fileID: 4660412927644837186, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -1174,6 +1174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a195bbd257e79346870e71b4c8adbbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerName: Player1
 --- !u!54 &687174492
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1499,6 +1500,34 @@ Transform:
   - {fileID: 841000421}
   m_Father: {fileID: 0}
   m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1071367311
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1071367312}
+  m_Layer: 0
+  m_Name: Trash Position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1071367312
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1071367311}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.62, y: 1.26, z: 7.69}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1397292200
 Prefab:

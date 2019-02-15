@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class InstantiateObjects : MonoBehaviour {
 
-    public GameObject tomatoeBarrel;
-    public GameObject potatoeBarrel;
+    public GameObject barrel;
+    public GameObject trashBarrel;
+
 
     public Transform tomatoePosition;
     public Transform potatoePosition;
+    public Transform trashPosition;
 
     // Use this for initialization
     void Start () {
@@ -16,8 +18,16 @@ public class InstantiateObjects : MonoBehaviour {
         //tomatoeBarrel = PlantsController.PlantType.Tomatoe;
         //potatoeBarrel = PlantsController.PlantType.Potatoe;
 
-        Instantiate(tomatoeBarrel, tomatoePosition.position, Quaternion.identity);
-        Instantiate(potatoeBarrel, potatoePosition.position, Quaternion.identity);
+       GameObject newSeedBarrel =  Instantiate(barrel, potatoePosition.position, Quaternion.identity);
+        PlantsController newSeeds = newSeedBarrel.GetComponent<PlantsController>();
+        newSeeds.YouAreA(PlantsController.PlantType.Potatoe);
+
+        GameObject newSeedBarrel2 = Instantiate(barrel, tomatoePosition.position, Quaternion.identity);
+        PlantsController newSeeds2 = newSeedBarrel2.GetComponent<PlantsController>();
+        newSeeds2.YouAreA(PlantsController.PlantType.Tomatoe);
+
+        GameObject newtrashBarrel = Instantiate(trashBarrel, trashPosition.position, Quaternion.identity);
+
     }
 	
 	// Update is called once per frame

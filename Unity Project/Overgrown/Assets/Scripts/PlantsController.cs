@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class PlantsController : MonoBehaviour
 {
-    internal enum PlantType  {Potatoe, Tomatoe };
-    PlantType thisPlant;
+    public enum PlantType  {Potatoe, Tomatoe };
+    public PlantType thisPlant;
 
     // Use this for initialization
     void Start()
@@ -28,27 +28,17 @@ public class PlantsController : MonoBehaviour
         throw new System.NotImplementedException();
     }
 
+    internal void YouAreA(PlantType plantType)
+    {
+        thisPlant = plantType;
+    }
+
     /// <summary>
     /// Controls the growing speed of the plants
     /// </summary>
     private void plantsGrowth()
     {
         throw new System.NotImplementedException();
-    }
-
-    internal void TypeOfPlant()
-    {
-
-            if (thisPlant == PlantType.Tomatoe)
-            {
-                print("You picked up a tomato");
-        
-            }
-
-            if (thisPlant == PlantType.Potatoe)
-            {
-                print("You picked up a potato");
-            }
     }
 
     internal void puttingSeedsDown()

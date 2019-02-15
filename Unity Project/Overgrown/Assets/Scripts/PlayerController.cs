@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
 
     private float raycastRange = 2f;
 
+    public string playerName;
+
     // Use this for initialization
     void Start () {
 
@@ -28,31 +30,67 @@ public class PlayerController : MonoBehaviour
 	// Update is called once per frame
 	void Update () {
 
-        if (Input.GetKey(KeyCode.W))
+        if (playerName == "Player1")
         {
-            moveForward();
+            if (Input.GetKey(KeyCode.W))
+            {
+                moveForward();
+            }
+
+            if (Input.GetKey(KeyCode.S))
+            {
+                moveBackwards();
+            }
+
+            if (Input.GetKey(KeyCode.A))
+            {
+                moveLeft();
+            }
+
+            if (Input.GetKey(KeyCode.D))
+            {
+                moveRight();
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+
+                Interact();
+            }
         }
 
-        if (Input.GetKey(KeyCode.S))
+        print(currently_Holding);
+
+        if (playerName == "Player2")
         {
-            moveBackwards();
+            if (Input.GetKey(KeyCode.UpArrow))
+            {
+                moveForward();
+            }
+
+            if (Input.GetKey(KeyCode.DownArrow))
+            {
+                moveBackwards();
+            }
+
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                moveLeft();
+            }
+
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                moveRight();
+            }
+
+            if (Input.GetKeyDown(KeyCode.RightShift))
+            {
+
+                Interact();
+            }
         }
 
-        if (Input.GetKey(KeyCode.A))
-        {
-            moveLeft();
-        }
-
-        if (Input.GetKey(KeyCode.D))
-        {
-            moveRight();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-
-            Interact();
-        }
+      
 
     }
 
@@ -91,10 +129,29 @@ public class PlayerController : MonoBehaviour
                      plotControl plot = info.collider.GetComponent<plotControl>();
                 if (plot)
                 {
-                    plot.Interact(currently_Holding);
+                    if (currently_Holding == InHand.Potatoe_Seeds || currently_Holding == InHand.Tomatoe_Seeds)
+                    {
+                        if (plot.plotIs == plotControl.PlotState.Empty)
+                        {
+                            plot.Interact(currently_Holding);
+                            currently_Holding = InHand.Empty;
+                        }
+                    }
+
+                    
+         
                 }
 
+                TrashController trash = info.collider.GetComponent<TrashController>();
+                if (trash)
+                {
+                    currently_Holding = InHand.Empty;
                 }
+
+
+            }
+
+
             }
 
         
@@ -117,11 +174,8 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void moveBackwards()
     {
-        if (Input.GetKey(KeyCode.S))
-        {
             transform.position += (Vector3.back * walkingSpeed * Time.deltaTime);
             transform.rotation = Quaternion.LookRotation(Vector3.back);
-        }
 
     }
 
