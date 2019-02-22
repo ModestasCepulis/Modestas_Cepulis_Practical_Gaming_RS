@@ -670,9 +670,12 @@ MonoBehaviour:
   barrel: {fileID: 1610139188889684, guid: c9c7ef3c68c57de4f9ee4ca996ae8027, type: 2}
   trashBarrel: {fileID: 1725835793901140, guid: fddc3e70d96a9084e86bf2666e32e021,
     type: 2}
+  pluckerBarrel: {fileID: 1214447040449824, guid: 5b67561eafaecac44b75115cac339209,
+    type: 2}
   tomatoePosition: {fileID: 164815658}
   potatoePosition: {fileID: 844846321}
   trashPosition: {fileID: 1071367312}
+  pluckerPosition: {fileID: 415547773}
 --- !u!1 &309876804
 GameObject:
   m_ObjectHideFlags: 0
@@ -927,6 +930,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1035796200}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &415547772
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 415547773}
+  m_Layer: 0
+  m_Name: Plucker Position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &415547773
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 415547772}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.26, y: 1.26, z: -3.44}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &566328203
 GameObject:

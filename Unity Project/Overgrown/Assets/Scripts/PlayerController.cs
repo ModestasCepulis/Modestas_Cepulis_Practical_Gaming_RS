@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 
-{   internal enum InHand { Empty, Potatoe_Seeds, Tomatoe_Seeds,Water, Potatoes, Tomatoes}
+{   internal enum InHand { Empty, Potatoe_Seeds,Tomatoe_Seeds, Water, Potatoes, Tomatoes, Plucker}
 
     InHand currently_Holding = InHand.Empty;
     /// <summary>
@@ -126,15 +126,26 @@ public class PlayerController : MonoBehaviour
                     }
                 }
 
+
+
+
                      plotControl plot = info.collider.GetComponent<plotControl>();
                 if (plot)
                 {
                     if (currently_Holding == InHand.Potatoe_Seeds || currently_Holding == InHand.Tomatoe_Seeds)
                     {
-                        if (plot.plotIs == plotControl.PlotState.Empty)
+                        if (plot.plotIs == plotControl.PlotState.Soil)
                         {
                             plot.Interact(currently_Holding);
                             currently_Holding = InHand.Empty;
+                        }
+                    }
+
+                    if(currently_Holding == InHand.Plucker)
+                    {
+                        if(plot.plotIs == plotControl.PlotState.Rubbish)
+                        {
+                            plot.Interact(currently_Holding);                        
                         }
                     }
 
@@ -148,10 +159,15 @@ public class PlayerController : MonoBehaviour
                     currently_Holding = InHand.Empty;
                 }
 
-
+                PluckerControl plucker = info.collider.GetComponent<PluckerControl>();
+                if (plucker)
+                {
+                    if(currently_Holding == InHand.Empty)
+                    {
+                        currently_Holding = InHand.Plucker;
+                    }                    
+                }
             }
-
-
             }
 
         
