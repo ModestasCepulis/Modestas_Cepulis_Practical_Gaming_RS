@@ -7,7 +7,6 @@ public class InstantiateObjects : MonoBehaviour {
     public GameObject barrel;
     public GameObject trashBarrel;
     public GameObject pluckerBarrel;
-    public Transform trashPosition;
 
     // Use this for initialization
     void Start () {
@@ -26,7 +25,7 @@ public class InstantiateObjects : MonoBehaviour {
         newSeeds2.YouAreA(PlantsController.PlantType.Tomatoe);
 
         //trash can 
-        GameObject newtrashBarrel = Instantiate(trashBarrel, trashPosition.position, Quaternion.identity);
+        GameObject newtrashBarrel = Instantiate(trashBarrel, new Vector3(1.02f, -0.3f, 5.92f), Quaternion.identity);
 
         //plucker
         GameObject newPluckerBarrel = Instantiate(pluckerBarrel, new Vector3(-16.7f, -0.277f, 6.1f), Quaternion.identity);
