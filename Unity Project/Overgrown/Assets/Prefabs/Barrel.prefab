@@ -8,48 +8,48 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications: []
     m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1505745325450990}
-  m_IsPrefabAsset: 1
---- !u!1 &1505745325450990
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1870255264448236}
+  m_IsPrefabParent: 1
+--- !u!1 &1870255264448236
 GameObject:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 6
+  serializedVersion: 5
   m_Component:
-  - component: {fileID: 4386193879287946}
-  - component: {fileID: 33539007737610454}
-  - component: {fileID: 23548423147929128}
-  - component: {fileID: 95958473779845670}
-  - component: {fileID: 114837208496809650}
-  - component: {fileID: 136646275341317502}
+  - component: {fileID: 4760771855828682}
+  - component: {fileID: 33886247541417952}
+  - component: {fileID: 23706397707864012}
+  - component: {fileID: 95090887584949984}
+  - component: {fileID: 114937380122133232}
+  - component: {fileID: 136240458894592170}
   m_Layer: 0
-  m_Name: barrel
+  m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4386193879287946
+--- !u!4 &4760771855828682
 Transform:
   m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1505745325450990}
-  m_LocalRotation: {x: 0.00000008146034, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.5084676, y: -0.30000004, z: 0.7109516}
+  m_GameObject: {fileID: 1870255264448236}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -17.122099, y: -0.30000103, z: -4.5432553}
   m_LocalScale: {x: 35, y: 35, z: 35}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23548423147929128
+--- !u!23 &23706397707864012
 MeshRenderer:
   m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1505745325450990}
+  m_GameObject: {fileID: 1870255264448236}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -57,7 +57,6 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 94ad0811b82df0e44a78eadcefaf183b, type: 2}
   m_StaticBatchInfo:
@@ -79,20 +78,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33539007737610454
+--- !u!33 &33886247541417952
 MeshFilter:
   m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1505745325450990}
+  m_GameObject: {fileID: 1870255264448236}
   m_Mesh: {fileID: 4300000, guid: 6f3f657341527b54db0e9162793f38d1, type: 3}
---- !u!95 &95958473779845670
+--- !u!95 &95090887584949984
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1505745325450990}
+  m_GameObject: {fileID: 1870255264448236}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 6f3f657341527b54db0e9162793f38d1, type: 3}
   m_Controller: {fileID: 0}
@@ -103,25 +102,27 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114837208496809650
+--- !u!114 &114937380122133232
 MonoBehaviour:
   m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1505745325450990}
+  m_GameObject: {fileID: 1870255264448236}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 792771601464aa442b8b051aa549cf23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thisPlant: 0
---- !u!136 &136646275341317502
+  thisPlant: 1
+  Shovel: {fileID: 0}
+  tomato_seeds_item: {fileID: 0}
+  tomatoes_item: {fileID: 0}
+--- !u!136 &136240458894592170
 CapsuleCollider:
   m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1505745325450990}
+  m_GameObject: {fileID: 1870255264448236}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1

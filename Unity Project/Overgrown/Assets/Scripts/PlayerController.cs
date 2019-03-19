@@ -21,11 +21,23 @@ public class PlayerController : MonoBehaviour
 
     public string playerName;
 
+    public GameObject Shovel;
+    public GameObject tomato_seeds_item;
+    public GameObject tomatoes_item;
+
+    GameObject Shovel_item_1;
+    GameObject tomato_seeds_item_1;
+    GameObject tomatoes_item_1;
+
+
     // Use this for initialization
     void Start () {
 
-		
-	}
+        Shovel_item_1 = Shovel;
+        tomatoes_item_1 = tomatoes_item;
+        tomato_seeds_item_1 = tomato_seeds_item;
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -57,6 +69,32 @@ public class PlayerController : MonoBehaviour
 
                 Interact();
             }
+
+            //Iventory system 
+
+            if (currently_Holding == InHand.Plucker)
+            {
+               Shovel_item_1.SetActive(true);
+            }
+
+            if(currently_Holding == InHand.Tomatoes)
+            {
+               tomatoes_item_1.SetActive(true);
+            }
+
+            if(currently_Holding == InHand.Tomatoe_Seeds)
+            {
+                tomato_seeds_item_1.SetActive(true);
+            }
+            
+
+            if(currently_Holding == InHand.Empty)
+            {
+                tomato_seeds_item_1.SetActive(false);
+                tomatoes_item_1.SetActive(false);
+                Shovel_item_1.SetActive(false);
+            }
+        
         }
 
         print(currently_Holding);
@@ -132,6 +170,7 @@ public class PlayerController : MonoBehaviour
                      plotControl plot = info.collider.GetComponent<plotControl>();
                 if (plot)
                 {
+                    //Seed planting
                     if (currently_Holding == InHand.Potatoe_Seeds || currently_Holding == InHand.Tomatoe_Seeds)
                     {
                         if (plot.plotIs == plotControl.PlotState.Soil)
@@ -141,6 +180,7 @@ public class PlayerController : MonoBehaviour
                         }
                     }
 
+                    //plucker for removing the rubbish (grass)
                     if(currently_Holding == InHand.Plucker)
                     {
                         if(plot.plotIs == plotControl.PlotState.Rubbish)
@@ -149,8 +189,19 @@ public class PlayerController : MonoBehaviour
                         }
                     }
 
-                    
-         
+                    //Once the plant is grown
+                    if (currently_Holding == InHand.Empty)
+                    {
+                        if (plot.plotIs == plotControl.PlotState.Tomatoe_Plant)
+                        {
+                            plot.Interact(currently_Holding);
+                            currently_Holding = InHand.Tomatoes;
+                        }
+                    }
+
+
+
+
                 }
 
                 TrashController trash = info.collider.GetComponent<TrashController>();

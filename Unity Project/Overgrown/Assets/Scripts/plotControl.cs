@@ -14,6 +14,11 @@ public class plotControl : MonoBehaviour {
 
     public GameObject rubbish;
     public GameObject Tomato_Seedling;
+    public GameObject Tomato_Plant;
+
+    public GameObject Shovel;
+    public GameObject tomato_seeds_item;
+    public GameObject tomatoes_item;
 
     GameObject Rubbish1;
     GameObject Rubbish2;
@@ -23,6 +28,14 @@ public class plotControl : MonoBehaviour {
     GameObject TomatoSeedling2;
     GameObject TomatoSeedling3;
 
+    GameObject TomatoPlant1;
+    GameObject TomatoPlant2;
+    GameObject TomatoPlant3;
+
+    GameObject Shovel_item_1;
+    GameObject tomato_seeds_item_1;
+    GameObject tomatoes_item_1;
+
     public string plotName;
 
 
@@ -31,11 +44,16 @@ public class plotControl : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
+        //Plot system
         if (plotName == "PlotOne")
         {
-            Rubbish1 = Instantiate(rubbish, new Vector3(27.84f, -5.09727f, 4.28f), Quaternion.identity);
-            TomatoSeedling1 = Instantiate(Tomato_Seedling, new Vector3(16.64f, -0.46f, 4.17f), Quaternion.identity);
+            Rubbish1 = Instantiate(rubbish, new Vector3(10.753f, 5.092f, 4.69f), Quaternion.identity);
+
+            TomatoSeedling1 = Instantiate(Tomato_Seedling, new Vector3(15.82f, -0.28f, 3.44f), Quaternion.identity);
+            TomatoPlant1 = Instantiate(Tomato_Plant, new Vector3(15.82f, -0.28f, 3.44f), Quaternion.identity);
+
             TomatoSeedling1.SetActive(false);
+            TomatoPlant1.SetActive(false);
         }
 
         if (plotName == "PlotTwo")
@@ -51,25 +69,15 @@ public class plotControl : MonoBehaviour {
             TomatoSeedling3 = Instantiate(Tomato_Seedling, new Vector3(16.64f, -0.46f, -13.79f), Quaternion.identity);
             TomatoSeedling3.SetActive(false);
         }
-
+        
     }
 
     // Update is called once per frame
     void Update () {
 
-        print(plotIs + " plot ");
+        print(plotIs);
+        print("Time: " + growthTimer);
 
-        if(plotIs == PlotState.Tomatoe_Seedling)
-        {
-            growthTimer = growthTimer - Time.deltaTime;
-        }
-
-        if(growthTimer == 0)
-        {
-            print("Tomato seedling has grown");
-            plotIs = PlotState.Tomatoe_Plant;
-            growthTimer = 10.0f;
-        }
 
 
         //Plants
@@ -77,12 +85,30 @@ public class plotControl : MonoBehaviour {
         {
             if (plotIs == PlotState.Soil)
             {
+                TomatoPlant1.SetActive(false);
+
                 Rubbish1.SetActive(false);
             }
 
             if (plotIs == PlotState.Tomatoe_Seedling)
             {
                 TomatoSeedling1.SetActive(true);
+
+                growthTimer = growthTimer - Time.deltaTime;
+
+                if (growthTimer <= 0)
+                {
+                    print("Tomato seedling has grown");
+                    plotIs = PlotState.Tomatoe_Plant;
+                    growthTimer = 10.0f;                    
+                }
+            }
+
+            if (plotIs == PlotState.Tomatoe_Plant)
+            {
+                TomatoSeedling1.SetActive(false);
+                TomatoPlant1.SetActive(true);
+
             }
 
         }
@@ -125,6 +151,10 @@ public class plotControl : MonoBehaviour {
         {
             case PlayerController.InHand.Empty:
                 // Check harvest etc..
+                if (plotIs == PlotState.Tomatoe_Plant)
+                {
+                    plotIs = PlotState.Soil;
+                }
                 break;
 
             case PlayerController.InHand.Potatoe_Seeds:
@@ -136,6 +166,7 @@ public class plotControl : MonoBehaviour {
                 break;
 
             case PlayerController.InHand.Tomatoe_Seeds:
+
 
                 if(plotIs == PlotState.Soil)
                 {
@@ -149,7 +180,7 @@ public class plotControl : MonoBehaviour {
                     plotIs = PlotState.Soil;
                 }                   
                 break;
-                
+
         }
     }
 }
