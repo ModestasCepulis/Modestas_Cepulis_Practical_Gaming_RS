@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlantsController : MonoBehaviour
 {
-    public enum PlantType  {Potatoe, Tomatoe };
+    public enum PlantType  {Carrot, Tomatoe };
     public PlantType thisPlant;
 
     // Use this for initialization

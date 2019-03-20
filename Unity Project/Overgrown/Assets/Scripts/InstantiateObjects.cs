@@ -17,7 +17,7 @@ public class InstantiateObjects : MonoBehaviour {
       //potatoe barrel
         GameObject newSeedBarrel =  Instantiate(barrel, new Vector3(-24.27f, -0.28f, -6.51f), Quaternion.identity);
         PlantsController newSeeds = newSeedBarrel.GetComponent<PlantsController>();
-        newSeeds.YouAreA(PlantsController.PlantType.Potatoe);
+        newSeeds.YouAreA(PlantsController.PlantType.Carrot);
 
         //tomatoe barrell
         GameObject newSeedBarrel2 = Instantiate(barrel, new Vector3(-23.81f, -0.28f, 0.82f), Quaternion.identity);

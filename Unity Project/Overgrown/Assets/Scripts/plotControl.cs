@@ -6,7 +6,7 @@ using UnityEngine;
 public class plotControl : MonoBehaviour {
 
 
-    internal enum PlotState {Soil, Rubbish, Potatoe_Seedling, Tomatoe_Seedling, Potatoe_Plant, Tomatoe_Plant, Unwatered_Potatoe_Plant, Unwatered_Tomatoe_Plant}
+    internal enum PlotState {Soil, Rubbish, Carrot_Seedling, Tomatoe_Seedling, Carrot_Plant, Tomatoe_Plant, Unwatered_Carrot_Plant, Unwatered_Tomatoe_Plant}
 
     internal PlotState plotIs = PlotState.Rubbish;
 
@@ -15,6 +15,8 @@ public class plotControl : MonoBehaviour {
     public GameObject rubbish;
     public GameObject Tomato_Seedling;
     public GameObject Tomato_Plant;
+    public GameObject Carrot_Seedling;
+    public GameObject Carrot_Plant;
 
     public GameObject Shovel;
     public GameObject tomato_seeds_item;
@@ -31,6 +33,11 @@ public class plotControl : MonoBehaviour {
     GameObject TomatoPlant1;
     GameObject TomatoPlant2;
     GameObject TomatoPlant3;
+
+    GameObject CarrotSeedling1;
+
+
+    GameObject CarrotPlant1;
 
     GameObject Shovel_item_1;
     GameObject tomato_seeds_item_1;
@@ -52,8 +59,14 @@ public class plotControl : MonoBehaviour {
             TomatoSeedling1 = Instantiate(Tomato_Seedling, new Vector3(15.82f, -0.28f, 3.44f), Quaternion.identity);
             TomatoPlant1 = Instantiate(Tomato_Plant, new Vector3(15.82f, -0.28f, 3.44f), Quaternion.identity);
 
+            CarrotSeedling1 = Instantiate(Carrot_Seedling, new Vector3(8.14f, 9.76f, 6.058f), Quaternion.identity);
+            CarrotPlant1 = Instantiate(Carrot_Plant, new Vector3(15.82f, -0.28f, 3.44f), Quaternion.identity);
+        
             TomatoSeedling1.SetActive(false);
             TomatoPlant1.SetActive(false);
+
+            CarrotSeedling1.SetActive(false);
+            CarrotPlant1.SetActive(false);
         }
 
         if (plotName == "PlotTwo")
@@ -83,13 +96,21 @@ public class plotControl : MonoBehaviour {
         //Plants
         if (plotName == "PlotOne")
         {
-            if (plotIs == PlotState.Soil)
+            //Rubbish
+            if (plotIs == PlotState.Rubbish)
             {
                 TomatoPlant1.SetActive(false);
+                CarrotPlant1.SetActive(false);
+                Rubbish1.SetActive(true);
+            }
 
+            //Soil plot
+            if (plotIs == PlotState.Soil)
+            {
                 Rubbish1.SetActive(false);
             }
 
+            //Tomato
             if (plotIs == PlotState.Tomatoe_Seedling)
             {
                 TomatoSeedling1.SetActive(true);
@@ -108,6 +129,28 @@ public class plotControl : MonoBehaviour {
             {
                 TomatoSeedling1.SetActive(false);
                 TomatoPlant1.SetActive(true);
+
+            }
+
+            //Carrot
+            if (plotIs == PlotState.Carrot_Seedling)
+            {
+                CarrotSeedling1.SetActive(true);
+
+                growthTimer = growthTimer - Time.deltaTime;
+
+                if (growthTimer <= 0)
+                {                   
+                    plotIs = PlotState.Carrot_Plant;
+                    growthTimer = 10.0f;
+                    print("Carrot seedling has grown and the plot is !!" + plotIs);
+                }
+            }
+
+            if (plotIs == PlotState.Carrot_Plant)
+            {
+                CarrotSeedling1.SetActive(false);
+                CarrotPlant1.SetActive(true);
 
             }
 
@@ -150,18 +193,25 @@ public class plotControl : MonoBehaviour {
         switch (currently_Holding)
         {
             case PlayerController.InHand.Empty:
-                // Check harvest etc..
+                // Check harvest etc.. (When the player harvests the plant)
                 if (plotIs == PlotState.Tomatoe_Plant)
                 {
-                    plotIs = PlotState.Soil;
+                    plotIs = PlotState.Rubbish;
                 }
+
+                if (plotIs == PlotState.Carrot_Plant)
+                {
+                    plotIs = PlotState.Rubbish;
+                }
+
                 break;
 
-            case PlayerController.InHand.Potatoe_Seeds:
+
+            case PlayerController.InHand.Carrot_Seeds:
 
                 if (plotIs == PlotState.Soil)
                 {                 
-                    plotIs = PlotState.Potatoe_Seedling;
+                    plotIs = PlotState.Carrot_Seedling;
                 }
                 break;
 
