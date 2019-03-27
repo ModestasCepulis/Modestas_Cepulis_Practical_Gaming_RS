@@ -10,7 +10,8 @@ public class plotControl : MonoBehaviour {
 
     internal PlotState plotIs = PlotState.Rubbish;
 
-    float growthTimer = 10.0f;
+    float growthTimer = 2.0f;
+    float timerAfterGrowth = 2.0f;
 
     public GameObject rubbish;
     public GameObject Tomato_Seedling;
@@ -121,7 +122,7 @@ public class plotControl : MonoBehaviour {
                 {
                     print("Tomato seedling has grown");
                     plotIs = PlotState.Tomatoe_Plant;
-                    growthTimer = 10.0f;                    
+                    growthTimer = timerAfterGrowth;                    
                 }
             }
 
@@ -142,7 +143,7 @@ public class plotControl : MonoBehaviour {
                 if (growthTimer <= 0)
                 {                   
                     plotIs = PlotState.Carrot_Plant;
-                    growthTimer = 10.0f;
+                    growthTimer = timerAfterGrowth;
                     print("Carrot seedling has grown and the plot is !!" + plotIs);
                 }
             }

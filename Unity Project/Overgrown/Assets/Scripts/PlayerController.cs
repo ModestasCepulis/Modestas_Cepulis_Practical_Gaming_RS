@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
 
 {   internal enum InHand { Empty, Carrot_Seeds,Tomatoe_Seeds, Water, Carrots, Tomatoes, Plucker}
 
-    InHand currently_Holding = InHand.Empty;
+    internal InHand currently_Holding = InHand.Empty;
     /// <summary>
     /// The walking speed of the character
     /// </summary>
@@ -259,16 +259,24 @@ public class PlayerController : MonoBehaviour
                 TableController table = info.collider.GetComponent<TableController>();
                 if(table)
                 {
-                    if(currently_Holding == InHand.Carrots)
+                    if (currently_Holding == InHand.Empty)
                     {
-                        
+                        table.InventoryItemTaken();                       
+                    }
+
+                    if (currently_Holding == InHand.Carrots)
+                    {                       
                         currently_Holding = InHand.Empty;
+                        table.putCarrotOn();
                     }
 
                     if (currently_Holding == InHand.Tomatoes)
                     {
                         currently_Holding = InHand.Empty;
+                        table.putTomatoOn();
                     }
+                  
+
                 }
             }
             }
