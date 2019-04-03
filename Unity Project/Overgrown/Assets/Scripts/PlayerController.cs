@@ -68,6 +68,13 @@ public class PlayerController : MonoBehaviour
 	// Update is called once per frame
 	void Update () {
 
+
+
+
+
+
+
+
         if (playerName == "Player1")
         {
             if (Input.GetKey(KeyCode.W))
@@ -316,17 +323,25 @@ public class PlayerController : MonoBehaviour
                 {
                     if (currently_Holding == InHand.Empty)
                     {
-                        table.CarrotsOnTheTable();
                         if(table.CarrotsOnTheTable())
                         {
                             currently_Holding = InHand.Carrots;
                         }
+                        else
+                        {
+                            table.CarrotSpotCancelling();
+                        }
 
-                        table.TomatoesOnTheTable();
+
                         if (table.TomatoesOnTheTable())
                         {
                             currently_Holding = InHand.Tomatoes;
                         }
+                        else
+                        {
+                            table.TomatoSpotCancelling();
+                        }
+
 
 
 

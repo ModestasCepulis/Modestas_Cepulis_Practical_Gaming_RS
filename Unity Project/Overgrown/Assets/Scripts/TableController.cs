@@ -42,6 +42,13 @@ public class TableController : MonoBehaviour
 
         print("Carrots Count: " + carrotsCount);
 
+        print("are tomatoes on the table " + TomatoesOnTheTable());
+
+        print("are carrots on the table " + CarrotsOnTheTable()); ;
+
+
+
+
     }
 
     internal void putCarrotOn()
@@ -72,8 +79,6 @@ public class TableController : MonoBehaviour
     {
          if (carrotsCount > 0)
          {      
-            CarrotSpot.SetActive(false);
-            tableInventory.Remove(CarrotSpot);
             itemSpace = 0;
             carrotsCount = 0;
 
@@ -87,8 +92,6 @@ public class TableController : MonoBehaviour
     {
         if (tomatoesCount > 0)
         {
-            TomatoSpot.SetActive(false);
-            tableInventory.Remove(TomatoSpot);
             itemSpace = 0;
             tomatoesCount = 0;
 
@@ -96,8 +99,18 @@ public class TableController : MonoBehaviour
         }
 
         return false;
+    }
 
+    public void TomatoSpotCancelling()
+    {
+        TomatoSpot.SetActive(false);
+        tableInventory.Remove(TomatoSpot);
+    }
 
+    public void CarrotSpotCancelling()
+    {
+        CarrotSpot.SetActive(false);
+        tableInventory.Remove(CarrotSpot);
     }
 
 

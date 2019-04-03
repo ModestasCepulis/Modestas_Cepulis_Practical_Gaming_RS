@@ -113,6 +113,9 @@ public class plotControl : MonoBehaviour {
     // Update is called once per frame
     void Update () {
 
+        print("Plot is: "+plotIs);
+
+
         //Plants
         if (plotName == "PlotOne")
         {
