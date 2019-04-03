@@ -30,12 +30,17 @@ public class PlayerController : MonoBehaviour
     public GameObject carrots_item;
 
     GameObject Shovel_item_player_1;
+    GameObject Shovel_item_player_2;
 
     GameObject tomato_seeds_item_player_1;
+    GameObject tomato_seeds_item_player_2;
     GameObject tomatoes_item_player_1;
+    GameObject tomatoes_item_player_2;
 
     GameObject carrots_seeds_item_player_1;
+    GameObject carrots_seeds_item_player_2;
     GameObject carrots_item_player_1;
+    GameObject carrots_item_player_2;
 
 
     // Use this for initialization
@@ -47,6 +52,14 @@ public class PlayerController : MonoBehaviour
 
         carrots_item_player_1 = carrots_item;
         carrots_seeds_item_player_1 = carrot_seeds_item;
+
+
+        Shovel_item_player_2 = Shovel;
+        tomatoes_item_player_2 = tomatoes_item;
+        tomato_seeds_item_player_2 = tomato_seeds_item;
+
+        carrots_item_player_2 = carrots_item;
+        carrots_seeds_item_player_2 = carrot_seeds_item;
 
 
 
@@ -123,8 +136,6 @@ public class PlayerController : MonoBehaviour
         
         }
 
-        print(currently_Holding);
-
         if (playerName == "Player2")
         {
             if (Input.GetKey(KeyCode.UpArrow))
@@ -152,7 +163,51 @@ public class PlayerController : MonoBehaviour
 
                 Interact();
             }
+
+            //Iventory system 
+
+            if (currently_Holding == InHand.Plucker)
+            {
+                Shovel_item_player_2.SetActive(true);
+            }
+
+            if (currently_Holding == InHand.Tomatoes)
+            {
+                tomatoes_item_player_2.SetActive(true);
+            }
+
+            if (currently_Holding == InHand.Tomatoe_Seeds)
+            {
+                tomato_seeds_item_player_2.SetActive(true);
+            }
+
+            if (currently_Holding == InHand.Carrot_Seeds)
+            {
+                carrots_seeds_item_player_2.SetActive(true);
+            }
+
+            if (currently_Holding == InHand.Carrots)
+            {
+                carrots_item_player_2.SetActive(true);
+            }
+
+
+            if (currently_Holding == InHand.Empty)
+            {
+                tomato_seeds_item_player_2.SetActive(false);
+                tomatoes_item_player_2.SetActive(false);
+                carrots_item_player_2.SetActive(false);
+                carrots_seeds_item_player_2.SetActive(false);
+                Shovel_item_player_2.SetActive(false);
+
+            }
+
         }
+
+
+
+
+    
 
       
 
@@ -261,7 +316,20 @@ public class PlayerController : MonoBehaviour
                 {
                     if (currently_Holding == InHand.Empty)
                     {
-                        table.InventoryItemTaken();                       
+                        table.CarrotsOnTheTable();
+                        if(table.CarrotsOnTheTable())
+                        {
+                            currently_Holding = InHand.Carrots;
+                        }
+
+                        table.TomatoesOnTheTable();
+                        if (table.TomatoesOnTheTable())
+                        {
+                            currently_Holding = InHand.Tomatoes;
+                        }
+
+
+
                     }
 
                     if (currently_Holding == InHand.Carrots)

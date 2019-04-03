@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class TableController : MonoBehaviour
@@ -18,6 +16,10 @@ public class TableController : MonoBehaviour
 
     string currentItemForPlayer;
 
+    int itemSpace = 0;
+    int tomatoesCount = 0;
+    int carrotsCount = 0;
+
 
 
 
@@ -34,39 +36,69 @@ public class TableController : MonoBehaviour
     void Update()
     {
 
+        print("Item Space: " +itemSpace);
+
+        print("Tomatoe Count: " + tomatoesCount);
+
+        print("Carrots Count: " + carrotsCount);
+
     }
 
     internal void putCarrotOn()
     {
-        CarrotSpot = Instantiate(carrot, transform.position + Vector3.up * tableInventory.Count, Quaternion.identity);
 
-        tableInventory.Add(CarrotSpot);
+        if(itemSpace == 0)
+        {
+            CarrotSpot = Instantiate(carrot, transform.position + Vector3.up * tableInventory.Count, Quaternion.identity);
+            tableInventory.Add(CarrotSpot);
+            itemSpace++;
+            tomatoesCount++;
+        }
     }
 
     internal void putTomatoOn()
     {
-        TomatoSpot = Instantiate(tomatoe, transform.position + Vector3.up * tableInventory.Count, Quaternion.identity);
-        tableInventory.Add(TomatoSpot);
+        if(itemSpace == 0)
+        {
+            TomatoSpot = Instantiate(tomatoe, transform.position + Vector3.up * tableInventory.Count, Quaternion.identity);
+            tableInventory.Add(TomatoSpot);
+            itemSpace++;
+            tomatoesCount++;
+        }
+
     }
 
-    internal void InventoryItemTaken(PlayerController.InHand currently_Holding)
+    public bool CarrotsOnTheTable()
     {
-
-         if (tableInventory.Contains(CarrotSpot))
-         {
-            PlayerController.InHand.Carrots;
-
-            tableInventory.Remove(CarrotSpot);
+         if (carrotsCount > 0)
+         {      
             CarrotSpot.SetActive(false);
+            tableInventory.Remove(CarrotSpot);
+            itemSpace = 0;
+            carrotsCount = 0;
+
+            return true;
         }
 
-        if (tableInventory.Contains(TomatoSpot))
-        {
-            PlayerController.InHand.Tomatoes;
-
-            tableInventory.Remove(TomatoSpot);
-            TomatoSpot.SetActive(false);           
-        }
-
+        return false;
     }   
+
+    public bool TomatoesOnTheTable()
+    {
+        if (tomatoesCount > 0)
+        {
+            TomatoSpot.SetActive(false);
+            tableInventory.Remove(TomatoSpot);
+            itemSpace = 0;
+            tomatoesCount = 0;
+
+            return true;
+        }
+
+        return false;
+
+
+    }
+
+
 }

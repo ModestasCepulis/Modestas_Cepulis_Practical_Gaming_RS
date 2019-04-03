@@ -36,9 +36,13 @@ public class plotControl : MonoBehaviour {
     GameObject TomatoPlant3;
 
     GameObject CarrotSeedling1;
+    GameObject CarrotSeedling2;
+    GameObject CarrotSeedling3;
 
 
     GameObject CarrotPlant1;
+    GameObject CarrotPlant2;
+    GameObject CarrotPlant3;
 
     GameObject Shovel_item_1;
     GameObject tomato_seeds_item_1;
@@ -55,13 +59,13 @@ public class plotControl : MonoBehaviour {
         //Plot system
         if (plotName == "PlotOne")
         {
-            Rubbish1 = Instantiate(rubbish, new Vector3(10.753f, 5.092f, 4.69f), Quaternion.identity);
+            Rubbish1 = Instantiate(rubbish, new Vector3(12.83f, 5.092f, 4.69f), Quaternion.identity);
 
-            TomatoSeedling1 = Instantiate(Tomato_Seedling, new Vector3(15.82f, -0.28f, 3.44f), Quaternion.identity);
-            TomatoPlant1 = Instantiate(Tomato_Plant, new Vector3(15.82f, -0.28f, 3.44f), Quaternion.identity);
+            TomatoSeedling1 = Instantiate(Tomato_Seedling, new Vector3(19.02f, -0.28f, 7.33f), Quaternion.identity);
+            TomatoPlant1 = Instantiate(Tomato_Plant, new Vector3(17.84f, -0.28f, 3.86f), Quaternion.identity);
 
-            CarrotSeedling1 = Instantiate(Carrot_Seedling, new Vector3(8.14f, 9.76f, 6.058f), Quaternion.identity);
-            CarrotPlant1 = Instantiate(Carrot_Plant, new Vector3(15.82f, -0.28f, 3.44f), Quaternion.identity);
+            CarrotSeedling1 = Instantiate(Carrot_Seedling, new Vector3(9.92f, 10.07f, 5.87f), Quaternion.identity);
+            CarrotPlant1 = Instantiate(Carrot_Plant, new Vector3(17.65f, -0.28f, 3.93f), Quaternion.identity);
         
             TomatoSeedling1.SetActive(false);
             TomatoPlant1.SetActive(false);
@@ -72,27 +76,42 @@ public class plotControl : MonoBehaviour {
 
         if (plotName == "PlotTwo")
         {
-            Rubbish2 = Instantiate(rubbish, new Vector3(27.84f, -5.09727f, -5.5f), Quaternion.identity);
-            TomatoSeedling2 = Instantiate(Tomato_Seedling, new Vector3(16.64f, -0.46f, -4.58f), Quaternion.identity);
+            Rubbish2 = Instantiate(rubbish, new Vector3(12.83f, 5.092f, -4.35f), Quaternion.identity);
+
+            TomatoSeedling2 = Instantiate(Tomato_Seedling, new Vector3(19.02f, -0.28f, -1.71f), Quaternion.identity);
+            TomatoPlant2 = Instantiate(Tomato_Plant, new Vector3(17.84f, -0.28f, -5.18f), Quaternion.identity);
+
+            CarrotSeedling2 = Instantiate(Carrot_Seedling, new Vector3(9.92f, 10.07f, -3.17f), Quaternion.identity);
+            CarrotPlant2 = Instantiate(Carrot_Plant, new Vector3(17.65f, -0.28f, -5.11f), Quaternion.identity);
+
             TomatoSeedling2.SetActive(false);
+            TomatoPlant2.SetActive(false);
+
+            CarrotSeedling2.SetActive(false);
+            CarrotPlant2.SetActive(false);
         }
 
         if (plotName == "PlotThree")
         {
-            Rubbish3 = Instantiate(rubbish, new Vector3(27.84f, -5.09727f, -14.25f), Quaternion.identity);
-            TomatoSeedling3 = Instantiate(Tomato_Seedling, new Vector3(16.64f, -0.46f, -13.79f), Quaternion.identity);
+            Rubbish3 = Instantiate(rubbish, new Vector3(12.83f, 5.092f, -12.28f), Quaternion.identity);
+
+            TomatoSeedling3 = Instantiate(Tomato_Seedling, new Vector3(19.02f, -0.28f, -9.64f), Quaternion.identity);
+            TomatoPlant3 = Instantiate(Tomato_Plant, new Vector3(17.84f, -0.28f, -13.11f), Quaternion.identity);
+
+            CarrotSeedling3 = Instantiate(Carrot_Seedling, new Vector3(9.92f, 10.07f, -11.1f), Quaternion.identity);
+            CarrotPlant3 = Instantiate(Carrot_Plant, new Vector3(17.65f, -0.28f, -13.04f), Quaternion.identity);
+
             TomatoSeedling3.SetActive(false);
+            TomatoPlant3.SetActive(false);
+
+            CarrotSeedling3.SetActive(false);
+            CarrotPlant3.SetActive(false);
         }
         
     }
 
     // Update is called once per frame
     void Update () {
-
-        print(plotIs);
-        print("Time: " + growthTimer);
-
-
 
         //Plants
         if (plotName == "PlotOne")
@@ -120,7 +139,6 @@ public class plotControl : MonoBehaviour {
 
                 if (growthTimer <= 0)
                 {
-                    print("Tomato seedling has grown");
                     plotIs = PlotState.Tomatoe_Plant;
                     growthTimer = timerAfterGrowth;                    
                 }
@@ -144,7 +162,6 @@ public class plotControl : MonoBehaviour {
                 {                   
                     plotIs = PlotState.Carrot_Plant;
                     growthTimer = timerAfterGrowth;
-                    print("Carrot seedling has grown and the plot is !!" + plotIs);
                 }
             }
 
@@ -160,28 +177,120 @@ public class plotControl : MonoBehaviour {
 
         if (plotName == "PlotTwo")
         {
+            //Rubbish
+            if (plotIs == PlotState.Rubbish)
+            {
+                TomatoPlant2.SetActive(false);
+                CarrotPlant2.SetActive(false);
+                Rubbish2.SetActive(true);
+            }
+
+            //Soil plot
             if (plotIs == PlotState.Soil)
             {
                 Rubbish2.SetActive(false);
             }
 
+            //Tomato
             if (plotIs == PlotState.Tomatoe_Seedling)
             {
                 TomatoSeedling2.SetActive(true);
+
+                growthTimer = growthTimer - Time.deltaTime;
+
+                if (growthTimer <= 0)
+                {
+                    plotIs = PlotState.Tomatoe_Plant;
+                    growthTimer = timerAfterGrowth;
+                }
+            }
+
+            if (plotIs == PlotState.Tomatoe_Plant)
+            {
+                TomatoSeedling2.SetActive(false);
+                TomatoPlant2.SetActive(true);
+
+            }
+
+            //Carrot
+            if (plotIs == PlotState.Carrot_Seedling)
+            {
+                CarrotSeedling2.SetActive(true);
+
+                growthTimer = growthTimer - Time.deltaTime;
+
+                if (growthTimer <= 0)
+                {
+                    plotIs = PlotState.Carrot_Plant;
+                    growthTimer = timerAfterGrowth;
+                }
+            }
+
+            if (plotIs == PlotState.Carrot_Plant)
+            {
+                CarrotSeedling2.SetActive(false);
+                CarrotPlant2.SetActive(true);
+
             }
 
         }
 
         if (plotName == "PlotThree")
         {
+            //Rubbish
+            if (plotIs == PlotState.Rubbish)
+            {
+                TomatoPlant3.SetActive(false);
+                CarrotPlant3.SetActive(false);
+                Rubbish3.SetActive(true);
+            }
+
+            //Soil plot
             if (plotIs == PlotState.Soil)
             {
                 Rubbish3.SetActive(false);
             }
 
+            //Tomato
             if (plotIs == PlotState.Tomatoe_Seedling)
             {
                 TomatoSeedling3.SetActive(true);
+
+                growthTimer = growthTimer - Time.deltaTime;
+
+                if (growthTimer <= 0)
+                {
+                    plotIs = PlotState.Tomatoe_Plant;
+                    growthTimer = timerAfterGrowth;
+                }
+            }
+
+            if (plotIs == PlotState.Tomatoe_Plant)
+            {
+                TomatoSeedling3.SetActive(false);
+                TomatoPlant3.SetActive(true);
+
+            }
+
+            //Carrot
+            if (plotIs == PlotState.Carrot_Seedling)
+            {
+                CarrotSeedling3.SetActive(true);
+
+                growthTimer = growthTimer - Time.deltaTime;
+
+                if (growthTimer <= 0)
+                {
+                    plotIs = PlotState.Carrot_Plant;
+                    growthTimer = timerAfterGrowth;
+                }
+            }
+
+            if (plotIs == PlotState.Carrot_Plant)
+            {
+                CarrotSeedling3.SetActive(false);
+                CarrotPlant3.SetActive(true);
+
             }
 
         }
