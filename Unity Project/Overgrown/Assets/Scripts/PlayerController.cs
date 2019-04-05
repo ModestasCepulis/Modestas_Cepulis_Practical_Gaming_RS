@@ -323,43 +323,47 @@ public class PlayerController : MonoBehaviour
                 {
                     if (currently_Holding == InHand.Empty)
                     {
-                        if(table.CarrotsOnTheTable())
+                        if (table.SomethingOnTable())
                         {
-                            currently_Holding = InHand.Carrots;
-                        }
-                        else
-                        {
-                            table.CarrotSpotCancelling();
-                        }
+
+                            GameObject item = table.removeTopItem();
+                            //add the script to the tomato and carrots prefab and add it to the table, + delete an extra table
+                            PlantsController newplant = item.GetComponent<PlantsController>();
+                            if (newplant.thisPlant == PlantsController.PlantType.Carrot)
+                                currently_Holding = InHand.Carrots;
+                            else
+                                currently_Holding = InHand.Tomatoes;
 
 
-                        if (table.TomatoesOnTheTable())
-                        {
-                            currently_Holding = InHand.Tomatoes;
-                        }
-                        else
-                        {
-                            table.TomatoSpotCancelling();
-                        }
+                            Destroy(item);
 
+                        }
 
 
 
                     }
 
-                    if (currently_Holding == InHand.Carrots)
-                    {                       
-                        currently_Holding = InHand.Empty;
-                        table.putCarrotOn();
-                    }
 
-                    if (currently_Holding == InHand.Tomatoes)
+
+
+
+                    else
                     {
-                        currently_Holding = InHand.Empty;
-                        table.putTomatoOn();
-                    }
-                  
 
+
+                        if (currently_Holding == InHand.Carrots)
+                        {
+                            currently_Holding = InHand.Empty;
+                            table.putCarrotOn();
+                        }
+
+                        if (currently_Holding == InHand.Tomatoes)
+                        {
+                            currently_Holding = InHand.Empty;
+                            table.putTomatoOn();
+                        }
+
+                    }
                 }
             }
             }
