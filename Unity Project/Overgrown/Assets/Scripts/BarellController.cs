@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlantsController : MonoBehaviour
+public class BarellController : MonoBehaviour
 {
     public enum PlantType  {Carrot, Tomatoe };
     public PlantType thisPlant;

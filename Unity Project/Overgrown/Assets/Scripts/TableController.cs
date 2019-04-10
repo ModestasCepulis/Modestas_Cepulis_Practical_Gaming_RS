@@ -88,6 +88,7 @@ public class TableController : MonoBehaviour
         GameObject item = tableInventory[tableInventory.Count - 1];
 
         tableInventory.Remove(item);
+        Destroy(item, 0.1f);
         return item;
     }
 }
