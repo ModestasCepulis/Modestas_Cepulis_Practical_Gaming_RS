@@ -18,6 +18,7 @@ public class TableController : MonoBehaviour
     string currentItemForPlayer;
 
     int itemSpace;
+
     int tomatoesCount;
     int carrotsCount;
 

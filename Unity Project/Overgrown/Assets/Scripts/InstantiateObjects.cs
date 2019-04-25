@@ -33,8 +33,12 @@ public class InstantiateObjects : MonoBehaviour {
 
         //table
         GameObject newTable = Instantiate(table, new Vector3(-0.73f, 1.27f, -20.58f), Quaternion.identity);
-        PlantsControl newtables = newTable.GetComponent<PlantsControl>();
-        newtables.YouAreA(PlantsControl.PlantType.CarrotItem);
+        GameObject newTable2 = Instantiate(table, new Vector3(-6.91f, 1.27f, -20.58f), Quaternion.identity);
+        GameObject newTable3 = Instantiate(table, new Vector3(-13.48f, 1.27f, -20.58f), Quaternion.identity);
+        GameObject newTable4 = Instantiate(table, new Vector3(-19.58f, 1.27f, -20.58f), Quaternion.identity);
+        GameObject newTable5 = Instantiate(table, new Vector3(-26.21f, 1.27f, -20.58f), Quaternion.identity);
+
+
 
     }
 	

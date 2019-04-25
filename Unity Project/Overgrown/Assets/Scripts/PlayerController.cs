@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private float turningSpeed = 20f;
 
-    private float raycastRange = 2f;
+    private float raycastRange = 4f;
 
     public string playerName;
 
@@ -60,8 +60,6 @@ public class PlayerController : MonoBehaviour
 
         carrots_item_player_2 = carrots_item;
         carrots_seeds_item_player_2 = carrot_seeds_item;
-
-
 
     }
 	
@@ -224,7 +222,7 @@ public class PlayerController : MonoBehaviour
     {
    
             Ray lookAt = new Ray(transform.position, transform.forward);
-            Debug.DrawRay(lookAt.origin, 10 * lookAt.direction,Color.red,2);
+            Debug.DrawRay(lookAt.origin, 15 * lookAt.direction,Color.red,5);
             RaycastHit info;
 
             //the Array only works if it is in the range of 'raycastRange'
@@ -374,9 +372,71 @@ public class PlayerController : MonoBehaviour
 
                     }
                 }
-            }
 
-        print("Warning, didnt expect to get here!!");
+
+
+            WagonController wagon = info.collider.GetComponent<WagonController>();
+            if (wagon)
+            {
+                if (currently_Holding == InHand.Empty)
+                {
+                    if (wagon.SomethingOnTable())
+                    {
+
+                        GameObject item = wagon.removeTopItem();
+                        //add the script to the tomato and carrots prefab and add it to the table, + delete an extra table
+                        VegControl newplant = item.GetComponent<VegControl>();
+                        if (newplant)
+                        {
+                            switch (newplant.thisIsA)
+                            {
+                                case VegControl.VegType.Carrot:
+
+
+                                    return InHand.Carrots;
+
+                                case VegControl.VegType.Tomatoe:
+
+
+                                    return InHand.Tomatoes;
+                            }
+                        }
+
+
+
+
+                    }
+
+
+
+                }
+
+
+
+
+
+                else
+                {
+
+
+                    if (currently_Holding == InHand.Carrots)
+                    {
+
+                        table.putCarrotOn();
+                        return InHand.Empty;
+                    }
+
+                    if (currently_Holding == InHand.Tomatoes)
+                    {
+
+                        table.putTomatoOn();
+                        return InHand.Empty;
+                    }
+
+                }
+            }
+        }
+
         return currently_Holding;
         
     }

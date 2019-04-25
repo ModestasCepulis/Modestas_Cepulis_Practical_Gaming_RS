@@ -4,46 +4,89 @@ using UnityEngine;
 
 public class WagonController : MonoBehaviour
 {
-    /// <summary>
-    /// The movement speed of the wagon object
-    /// </summary>
-    private float movementSpeed;
-    /// <summary>
-    /// The amount of time it takes for the wagon to make trips
-    /// </summary>
-    private float timeToStay;
+    public GameObject carrot;
+    public GameObject tomatoe;
+
+    List<GameObject> wagonInventory;
+
+    GameObject CarrotSpot;
+    GameObject TomatoSpot;
+
+    PlayerController player = new PlayerController();
+
+    int itemSpace;
+
+    int tomatoesCount;
+    int carrotsCount;
+
+
+
 
     // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
-    /// <summary>
-    /// Controls the movement of the object
-    /// </summary>
-    private void wagonMovement()
+    void Start()
     {
-        throw new System.NotImplementedException();
+
+        wagonInventory = new List<GameObject>();
+
+
     }
 
-    /// <summary>
-    /// The amount of time the object takes to travel
-    /// </summary>
-    private void tripTimer()
+    // Update is called once per frame
+    void Update()
     {
-        throw new System.NotImplementedException();
+
+        print("Item Space: " + itemSpace);
+
+        print("Tomatoe Count: " + tomatoesCount);
+
+        print("Carrots Count: " + carrotsCount);
+
+        //   print("are tomatoes on the table " + TomatoesOnTheTable());
+
+        print("are carrots on the table " + SomethingOnTable()); ;
+
+
+
+
     }
 
-    /// <summary>
-    /// The type of items that the player gets for an award
-    /// </summary>
-    private void awardItems()
+    internal void putCarrotOn()
     {
-        throw new System.NotImplementedException();
+
+
+        CarrotSpot = Instantiate(carrot, transform.position + Vector3.up * wagonInventory.Count, Quaternion.identity);
+        wagonInventory.Add(CarrotSpot);
+
+        carrotsCount++;
+
+
+    }
+
+    internal void putTomatoOn()
+    {
+
+        TomatoSpot = Instantiate(tomatoe, transform.position + Vector3.up * wagonInventory.Count, Quaternion.identity);
+        wagonInventory.Add(TomatoSpot);
+
+        tomatoesCount++;
+
+
+
+    }
+
+    public bool SomethingOnTable()
+    {
+        return wagonInventory.Count > 0;
+    }
+
+
+    internal GameObject removeTopItem()
+    {
+        carrotsCount--;
+        GameObject item = wagonInventory[wagonInventory.Count - 1];
+
+        wagonInventory.Remove(item);
+        Destroy(item, 0.1f);
+        return item;
     }
 }
