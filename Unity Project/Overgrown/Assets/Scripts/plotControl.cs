@@ -301,6 +301,7 @@ public class plotControl : MonoBehaviour {
 
     }
 
+    //player 1
     internal void Interact(PlayerController.InHand currently_Holding)
     {
         switch (currently_Holding)
@@ -346,4 +347,53 @@ public class plotControl : MonoBehaviour {
 
         }
     }
+
+    //player2
+    internal void InteractP2(Player2Control.InHand currently_Holding)
+    {
+        switch (currently_Holding)
+        {
+            case Player2Control.InHand.Empty:
+                // Check harvest etc.. (When the player harvests the plant)
+                if (plotIs == PlotState.Tomatoe_Plant)
+                {
+                    plotIs = PlotState.Rubbish;
+                }
+
+                if (plotIs == PlotState.Carrot_Plant)
+                {
+                    plotIs = PlotState.Rubbish;
+                }
+
+                break;
+
+
+            case Player2Control.InHand.Carrot_Seeds:
+
+                if (plotIs == PlotState.Soil)
+                {
+                    plotIs = PlotState.Carrot_Seedling;
+                }
+                break;
+
+            case Player2Control.InHand.Tomatoe_Seeds:
+
+
+                if (plotIs == PlotState.Soil)
+                {
+                    plotIs = PlotState.Tomatoe_Seedling;
+                }
+                break;
+
+            case Player2Control.InHand.Plucker:
+                if (plotIs == PlotState.Rubbish)
+                {
+                    plotIs = PlotState.Soil;
+                }
+                break;
+
+        }
+    }
+
+
 }

@@ -19,8 +19,6 @@ public class PlayerController : MonoBehaviour
 
     private float raycastRange = 4f;
 
-    public string playerName;
-
     public GameObject Shovel;
 
     public GameObject tomato_seeds_item;
@@ -30,18 +28,12 @@ public class PlayerController : MonoBehaviour
     public GameObject carrots_item;
 
     GameObject Shovel_item_player_1;
-    GameObject Shovel_item_player_2;
 
     GameObject tomato_seeds_item_player_1;
-    GameObject tomato_seeds_item_player_2;
     GameObject tomatoes_item_player_1;
-    GameObject tomatoes_item_player_2;
 
     GameObject carrots_seeds_item_player_1;
-    GameObject carrots_seeds_item_player_2;
     GameObject carrots_item_player_1;
-    GameObject carrots_item_player_2;
-
 
     // Use this for initialization
     void Start () {
@@ -53,170 +45,78 @@ public class PlayerController : MonoBehaviour
         carrots_item_player_1 = carrots_item;
         carrots_seeds_item_player_1 = carrot_seeds_item;
 
-
-        Shovel_item_player_2 = Shovel;
-        tomatoes_item_player_2 = tomatoes_item;
-        tomato_seeds_item_player_2 = tomato_seeds_item;
-
-        carrots_item_player_2 = carrots_item;
-        carrots_seeds_item_player_2 = carrot_seeds_item;
-
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
 
 
-
-
-
-
-
-
-        if (playerName == "Player1")
+        if (Input.GetKey(KeyCode.W))
         {
-            if (Input.GetKey(KeyCode.W))
-            {
-                moveForward();
-            }
-
-            if (Input.GetKey(KeyCode.S))
-            {
-                moveBackwards();
-            }
-
-            if (Input.GetKey(KeyCode.A))
-            {
-                moveLeft();
-            }
-
-            if (Input.GetKey(KeyCode.D))
-            {
-                moveRight();
-            }
-
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-
-               currently_Holding =  Interact();
-            }
-
-            //Iventory system 
-
-            if (currently_Holding == InHand.Plucker)
-            {
-               Shovel_item_player_1.SetActive(true);
-            }
-
-            if(currently_Holding == InHand.Tomatoes)
-            {
-               tomatoes_item_player_1.SetActive(true);
-            }
-
-            if(currently_Holding == InHand.Tomatoe_Seeds)
-            {
-                tomato_seeds_item_player_1.SetActive(true);
-            }
-
-            if (currently_Holding == InHand.Carrot_Seeds)
-            {
-                carrots_seeds_item_player_1.SetActive(true);
-            }
-
-            if (currently_Holding == InHand.Carrots)
-            {
-                carrots_item_player_1.SetActive(true);
-            }
-
-
-            if (currently_Holding == InHand.Empty)
-            {
-                tomato_seeds_item_player_1.SetActive(false);
-                tomatoes_item_player_1.SetActive(false);
-                carrots_item_player_1.SetActive(false);
-                carrots_seeds_item_player_1.SetActive(false);
-                Shovel_item_player_1.SetActive(false);
-
-            }
-        
+            moveForward();
         }
 
-        if (playerName == "Player2")
+        if (Input.GetKey(KeyCode.S))
         {
-            if (Input.GetKey(KeyCode.UpArrow))
-            {
-                moveForward();
-            }
+            moveBackwards();
+        }
 
-            if (Input.GetKey(KeyCode.DownArrow))
-            {
-                moveBackwards();
-            }
+        if (Input.GetKey(KeyCode.A))
+        {
+            moveLeft();
+        }
 
-            if (Input.GetKey(KeyCode.LeftArrow))
-            {
-                moveLeft();
-            }
+        if (Input.GetKey(KeyCode.D))
+        {
+            moveRight();
+        }
 
-            if (Input.GetKey(KeyCode.RightArrow))
-            {
-                moveRight();
-            }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
 
-            if (Input.GetKeyDown(KeyCode.RightShift))
-            {
+            currently_Holding = Interact();
+        }
 
-                Interact();
-            }
+        //Iventory system 
 
-            //Iventory system 
+        if (currently_Holding == InHand.Plucker)
+        {
+            Shovel_item_player_1.SetActive(true);
+        }
 
-            if (currently_Holding == InHand.Plucker)
-            {
-                Shovel_item_player_2.SetActive(true);
-            }
+        if (currently_Holding == InHand.Tomatoes)
+        {
+            tomatoes_item_player_1.SetActive(true);
+        }
 
-            if (currently_Holding == InHand.Tomatoes)
-            {
-                tomatoes_item_player_2.SetActive(true);
-            }
+        if (currently_Holding == InHand.Tomatoe_Seeds)
+        {
+            tomato_seeds_item_player_1.SetActive(true);
+        }
 
-            if (currently_Holding == InHand.Tomatoe_Seeds)
-            {
-                tomato_seeds_item_player_2.SetActive(true);
-            }
+        if (currently_Holding == InHand.Carrot_Seeds)
+        {
+            carrots_seeds_item_player_1.SetActive(true);
+        }
 
-            if (currently_Holding == InHand.Carrot_Seeds)
-            {
-                carrots_seeds_item_player_2.SetActive(true);
-            }
-
-            if (currently_Holding == InHand.Carrots)
-            {
-                carrots_item_player_2.SetActive(true);
-            }
-
-
-            if (currently_Holding == InHand.Empty)
-            {
-                tomato_seeds_item_player_2.SetActive(false);
-                tomatoes_item_player_2.SetActive(false);
-                carrots_item_player_2.SetActive(false);
-                carrots_seeds_item_player_2.SetActive(false);
-                Shovel_item_player_2.SetActive(false);
-
-            }
-
+        if (currently_Holding == InHand.Carrots)
+        {
+            carrots_item_player_1.SetActive(true);
         }
 
 
+        if (currently_Holding == InHand.Empty)
+        {
+            tomato_seeds_item_player_1.SetActive(false);
+            tomatoes_item_player_1.SetActive(false);
+            carrots_item_player_1.SetActive(false);
+            carrots_seeds_item_player_1.SetActive(false);
+            Shovel_item_player_1.SetActive(false);
 
-
-    
-
-      
-
+        }
     }
+ 
 
     private InHand Interact()
     {
@@ -375,6 +275,7 @@ public class PlayerController : MonoBehaviour
 
 
 
+
             WagonController wagon = info.collider.GetComponent<WagonController>();
             if (wagon)
             {
@@ -384,7 +285,6 @@ public class PlayerController : MonoBehaviour
                     {
 
                         GameObject item = wagon.removeTopItem();
-                        //add the script to the tomato and carrots prefab and add it to the table, + delete an extra table
                         VegControl newplant = item.GetComponent<VegControl>();
                         if (newplant)
                         {
@@ -411,10 +311,6 @@ public class PlayerController : MonoBehaviour
 
                 }
 
-
-
-
-
                 else
                 {
 
@@ -422,14 +318,14 @@ public class PlayerController : MonoBehaviour
                     if (currently_Holding == InHand.Carrots)
                     {
 
-                        table.putCarrotOn();
+                        wagon.putCarrotOn();
                         return InHand.Empty;
                     }
 
                     if (currently_Holding == InHand.Tomatoes)
                     {
 
-                        table.putTomatoOn();
+                        wagon.putTomatoOn();
                         return InHand.Empty;
                     }
 
@@ -480,30 +376,5 @@ public class PlayerController : MonoBehaviour
             transform.position += (Vector3.right * turningSpeed * Time.deltaTime);
             transform.rotation = Quaternion.LookRotation(Vector3.right);
     }
-
-    /// <summary>
-    /// Uses a selected item
-    /// </summary>
-    private void useItem()
-    {
-     
-    }
-
-    /// <summary>
-    /// Picks up a selected item
-    /// </summary>
-    private void pickUpItem()
-    {
-      
-    }
-
-    /// <summary>
-    /// Drops a selected item
-    /// </summary>
-    private void dropItem()
-    {
-       
-    }
-
 
 }

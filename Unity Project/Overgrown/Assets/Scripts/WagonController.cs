@@ -4,6 +4,20 @@ using UnityEngine;
 
 public class WagonController : MonoBehaviour
 {
+
+    [Header("Wagon Movement")]
+
+    public GameObject[] waypoints;
+    int current = 0;
+    float rotSpeed;
+    public float speed;
+    float WPradius = 1;
+
+    float wagonTimer = 5f;
+
+
+
+    [Header("Veggie Controller")]
     public GameObject carrot;
     public GameObject tomatoe;
 
@@ -34,16 +48,22 @@ public class WagonController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        wagonTimer = wagonTimer - Time.deltaTime;
 
-        print("Item Space: " + itemSpace);
+        while(wagonTimer > 0)
+        {
+            if (Vector3.Distance(waypoints[current].transform.position, transform.position) < WPradius)
+            {
+                current++;
+                if (current >= waypoints.Length)
+                {
+                    current = 0;
+                }
+            }
 
-        print("Tomatoe Count: " + tomatoesCount);
+            transform.position = Vector3.MoveTowards(transform.position, waypoints[current].transform.position, Time.deltaTime * speed);
+        }
 
-        print("Carrots Count: " + carrotsCount);
-
-        //   print("are tomatoes on the table " + TomatoesOnTheTable());
-
-        print("are carrots on the table " + SomethingOnTable()); ;
 
 
 
