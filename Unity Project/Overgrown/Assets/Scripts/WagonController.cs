@@ -50,7 +50,7 @@ public class WagonController : MonoBehaviour
     {
         wagonTimer = wagonTimer - Time.deltaTime;
 
-        while(wagonTimer > 0)
+        if(wagonTimer > 0)
         {
             if (Vector3.Distance(waypoints[current].transform.position, transform.position) < WPradius)
             {
@@ -62,6 +62,10 @@ public class WagonController : MonoBehaviour
             }
 
             transform.position = Vector3.MoveTowards(transform.position, waypoints[current].transform.position, Time.deltaTime * speed);
+        }
+        else
+        {
+            wagonTimer = 5f;
         }
 
 
