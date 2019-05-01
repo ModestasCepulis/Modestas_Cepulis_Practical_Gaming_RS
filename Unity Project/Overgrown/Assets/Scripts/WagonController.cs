@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,7 +14,7 @@ public class WagonController : MonoBehaviour
     public float speed;
     float WPradius = 1;
 
-    float wagonTimer = 5f;
+    float wagonTimer = 6f;
 
 
 
@@ -33,6 +34,9 @@ public class WagonController : MonoBehaviour
     int tomatoesCount;
     int carrotsCount;
 
+    int randomTomatoes;
+    int randomCarrots;
+
 
 
 
@@ -45,33 +49,75 @@ public class WagonController : MonoBehaviour
 
     }
 
+
     // Update is called once per frame
     void Update()
     {
-        wagonTimer = wagonTimer - Time.deltaTime;
+
+        RequiredVeg();
 
         if(wagonTimer > 0)
         {
-            if (Vector3.Distance(waypoints[current].transform.position, transform.position) < WPradius)
-            {
-                current++;
-                if (current >= waypoints.Length)
-                {
-                    current = 0;
-                }
-            }
-
-            transform.position = Vector3.MoveTowards(transform.position, waypoints[current].transform.position, Time.deltaTime * speed);
+            WagonComingIn();
         }
-        else
+
+        if (wagonTimer <= 0)
+        {
+            WagonLeaving();
+        }
+
+        TimerCountDown();
+
+        RandomGeneratedNumbers();
+
+
+        /*(  wagonTimer = wagonTimer - Time.deltaTime;
+
+          if(wagonTimer > 0)
+          {
+              if (Vector3.Distance(waypoints[current].transform.position, transform.position) < WPradius)
+              {
+                  current++;
+                  if (current >= waypoints.Length)
+                  {
+                      current = 0;
+                  }
+              }
+
+              transform.position = Vector3.MoveTowards(transform.position, waypoints[current].transform.position, Time.deltaTime * speed);
+          }
+          else
+          {
+              wagonTimer = 5f;
+          }*/
+
+
+
+    }
+
+    private void RandomGeneratedNumbers()
+    {
+        //
+        UnityEngine.Random.Range(1, 20);
+
+    }
+
+    private void TimerCountDown()
+    {
+
+
+        TextMesh timerCount = GameObject.Find("Timer").GetComponent<TextMesh>();
+        timerCount.text = wagonTimer.ToString("F2");
+
+        if (transform.position == waypoints[0].transform.position)
+        {
+            wagonTimer = wagonTimer - Time.deltaTime;
+        }
+
+        if (transform.position == waypoints[1].transform.position)
         {
             wagonTimer = 5f;
         }
-
-
-
-
-
     }
 
     internal void putCarrotOn()
@@ -113,4 +159,36 @@ public class WagonController : MonoBehaviour
         Destroy(item, 0.1f);
         return item;
     }
+
+
+
+    private void WagonComingIn()
+    {
+
+     transform.position = Vector3.MoveTowards(transform.position, waypoints[0].transform.position, Time.deltaTime * speed);
+
+    }
+
+    private void RequiredVeg()
+    {
+        if (transform.position == waypoints[0].transform.position)
+        {
+            TextMesh TomatoeText = GameObject.Find("RequiredTomatoes").GetComponent<TextMesh>();
+            TomatoeText.text = randomTomatoes.ToString("F2");
+
+            TextMesh CarrotText = GameObject.Find("RequiredCarrots").GetComponent<TextMesh>();
+            CarrotText.text = randomCarrots.ToString("F2");
+        }
+
+
+
+    }
+
+    private void WagonLeaving()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, waypoints[1].transform.position, Time.deltaTime * speed);
+    }
+
+
+
 }
