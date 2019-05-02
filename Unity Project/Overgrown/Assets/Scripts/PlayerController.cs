@@ -279,41 +279,8 @@ public class PlayerController : MonoBehaviour
             WagonController wagon = info.collider.GetComponent<WagonController>();
             if (wagon)
             {
-                if (currently_Holding == InHand.Empty)
+                
                 {
-                    if (wagon.SomethingOnTable())
-                    {
-
-                        GameObject item = wagon.removeTopItem();
-                        VegControl newplant = item.GetComponent<VegControl>();
-                        if (newplant)
-                        {
-                            switch (newplant.thisIsA)
-                            {
-                                case VegControl.VegType.Carrot:
-
-
-                                    return InHand.Carrots;
-
-                                case VegControl.VegType.Tomatoe:
-
-
-                                    return InHand.Tomatoes;
-                            }
-                        }
-
-
-
-
-                    }
-
-
-
-                }
-
-                else
-                {
-
 
                     if (currently_Holding == InHand.Carrots)
                     {
@@ -331,7 +298,36 @@ public class PlayerController : MonoBehaviour
 
                 }
             }
+
+
+
+
+            Player2Control playerHit = info.collider.GetComponent<Player2Control>();
+            if (playerHit)
+            {
+                GameObject player2;
+
+                if (currently_Holding == InHand.Plucker)
+                {
+
+                    if (player2 = GameObject.FindWithTag("Player2"))
+                    {
+                        player2.transform.position = new Vector3(playerHit.transform.position.x, transform.position.y + 7, transform.position.z);
+                    }
+
+                }
+
+
+            }
+
+
         }
+
+
+       
+
+
+
 
         return currently_Holding;
         

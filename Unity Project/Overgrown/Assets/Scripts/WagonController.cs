@@ -40,6 +40,14 @@ public class WagonController : MonoBehaviour
 
     int sumOfRequiredVeg;
 
+    [Header("Score controller")]
+
+    int score;
+    int totalScore;
+
+
+
+
 
     // Use this for initialization
     void Start()
@@ -55,25 +63,27 @@ public class WagonController : MonoBehaviour
 
 
 
-        if(sumOfRequiredVeg >= 20)
+        if (sumOfRequiredVeg >= 20)
         {
-            wagonTimer = 70f;
+            wagonTimer = 50f;
         }
 
         if (sumOfRequiredVeg >= 40)
         {
-            wagonTimer = 110f;
+            wagonTimer = 120f;
         }
 
         if (sumOfRequiredVeg < 20)
         {
-            wagonTimer = 40f;
+            wagonTimer = 45f;
         }
 
         if (sumOfRequiredVeg <= 10)
         {
             wagonTimer = 20f;
         }
+
+
 
 
 
@@ -100,10 +110,13 @@ public class WagonController : MonoBehaviour
 
         RandomGeneratedNumbers();
 
-        if(tomatoesCount == 0 && carrotsCount == 0)
-        {
 
+        if (randomTomatoes <= tomatoesCount && randomCarrots <= carrotsCount)
+        {
+            WagonLeaving();
         }
+
+
 
 
         /*(  wagonTimer = wagonTimer - Time.deltaTime;
@@ -144,14 +157,29 @@ public class WagonController : MonoBehaviour
         TextMesh timerCount = GameObject.Find("Timer").GetComponent<TextMesh>();
         timerCount.text = wagonTimer.ToString("F2");
 
+        //if it goes to the front position(the actual game area)
         if (transform.position == waypoints[0].transform.position)
         {
             wagonTimer = wagonTimer - Time.deltaTime;
         }
 
+        //if it goes to the back position (outside of game area)
         if (transform.position == waypoints[1].transform.position)
         {
+            //RESET EVERYTHING
             wagonTimer = defaultWagonTime;
+            score = tomatoesCount * carrotsCount;
+            totalScore = totalScore + score;
+
+            carrotsCount = 0;
+            tomatoesCount = 0;
+
+
+            TextMesh scoreCount = GameObject.Find("Score").GetComponent<TextMesh>();
+            scoreCount.text = totalScore.ToString("F2");
+
+            removingWagonItems();
+
         }
     }
 
@@ -159,12 +187,12 @@ public class WagonController : MonoBehaviour
     {
 
 
-        CarrotSpot = Instantiate(carrot, transform.position + Vector3.up * wagonInventory.Count, Quaternion.identity);
+        CarrotSpot = Instantiate(carrot, transform.position + Vector3.up * wagonInventory.Count, Quaternion.identity, transform);
         wagonInventory.Add(CarrotSpot);
 
         carrotsCount++;
 
-        randomCarrots = randomCarrots - carrotsCount;
+        randomCarrots = randomCarrots - 1;
 
 
     }
@@ -172,12 +200,12 @@ public class WagonController : MonoBehaviour
     internal void putTomatoOn()
     {
 
-        TomatoSpot = Instantiate(tomatoe, transform.position + Vector3.up * wagonInventory.Count, Quaternion.identity);
+        TomatoSpot = Instantiate(tomatoe, transform.position + Vector3.up * wagonInventory.Count, Quaternion.identity, transform);
         wagonInventory.Add(TomatoSpot);
 
         tomatoesCount++;
 
-        randomTomatoes = randomTomatoes - tomatoesCount;
+        randomTomatoes = randomTomatoes - 1;
 
 
 
@@ -213,11 +241,24 @@ public class WagonController : MonoBehaviour
         if (transform.position == waypoints[0].transform.position)
         {
 
+
             TextMesh TomatoeText = GameObject.Find("RequiredTomatoes").GetComponent<TextMesh>();
             TomatoeText.text = randomTomatoes.ToString("F0");
 
             TextMesh CarrotText = GameObject.Find("RequiredCarrots").GetComponent<TextMesh>();
             CarrotText.text = randomCarrots.ToString("F0");
+
+            //if the player adds more than the required amount the system gives the player more points for it
+            if (randomCarrots <= 0)
+            {
+                CarrotText.text = "EXTRA";
+            }
+
+            if (randomTomatoes <= 0)
+            {
+                TomatoeText.text = "EXTRA";
+            }
+
         }
 
 
@@ -227,6 +268,17 @@ public class WagonController : MonoBehaviour
     private void WagonLeaving()
     {
         transform.position = Vector3.MoveTowards(transform.position, waypoints[1].transform.position, Time.deltaTime * speed);
+
+    }
+
+    private void removingWagonItems()
+    {
+        foreach (GameObject item in wagonInventory)
+        {
+            wagonInventory.Remove(item);
+            Destroy(item);
+        }
+
     }
 
 

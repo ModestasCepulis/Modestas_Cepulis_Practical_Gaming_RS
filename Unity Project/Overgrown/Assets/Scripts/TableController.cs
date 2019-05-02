@@ -38,19 +38,6 @@ public class TableController : MonoBehaviour
     void Update()
     {
 
-        print("Item Space: " +itemSpace);
-
-        print("Tomatoe Count: " + tomatoesCount);
-
-        print("Carrots Count: " + carrotsCount);
-
-     //   print("are tomatoes on the table " + TomatoesOnTheTable());
-
-        print("are carrots on the table " + SomethingOnTable()); ;
-
-
-
-
     }
 
     internal void putCarrotOn()

@@ -335,6 +335,25 @@ public class Player2Control : MonoBehaviour
 
                 }
             }
+
+
+            PlayerController playerHit = info.collider.GetComponent<PlayerController>();
+            if (playerHit)
+            {
+                GameObject player1;
+
+
+            if(currently_Holding == InHand.Plucker)
+                {
+                    if (player1 = GameObject.FindWithTag("Player1"))
+                    {
+                        player1.transform.position = new Vector3(playerHit.transform.position.x, transform.position.y + 7, transform.position.z);
+                    }
+                }
+
+
+
+            }
         }
 
         return currently_Holding;
