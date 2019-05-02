@@ -14,7 +14,8 @@ public class WagonController : MonoBehaviour
     public float speed;
     float WPradius = 1;
 
-    float wagonTimer = 6f;
+    float wagonTimer;
+    float defaultWagonTime = 100f;
 
 
 
@@ -37,7 +38,7 @@ public class WagonController : MonoBehaviour
     int randomTomatoes;
     int randomCarrots;
 
-
+    int sumOfRequiredVeg;
 
 
     // Use this for initialization
@@ -45,6 +46,35 @@ public class WagonController : MonoBehaviour
     {
 
         wagonInventory = new List<GameObject>();
+
+        randomTomatoes = UnityEngine.Random.Range(1, 30);
+
+        randomCarrots = UnityEngine.Random.Range(1, 30);
+
+        sumOfRequiredVeg = randomTomatoes + randomCarrots;
+
+
+
+        if(sumOfRequiredVeg >= 20)
+        {
+            wagonTimer = 70f;
+        }
+
+        if (sumOfRequiredVeg >= 40)
+        {
+            wagonTimer = 110f;
+        }
+
+        if (sumOfRequiredVeg < 20)
+        {
+            wagonTimer = 40f;
+        }
+
+        if (sumOfRequiredVeg <= 10)
+        {
+            wagonTimer = 20f;
+        }
+
 
 
     }
@@ -69,6 +99,11 @@ public class WagonController : MonoBehaviour
         TimerCountDown();
 
         RandomGeneratedNumbers();
+
+        if(tomatoesCount == 0 && carrotsCount == 0)
+        {
+
+        }
 
 
         /*(  wagonTimer = wagonTimer - Time.deltaTime;
@@ -116,7 +151,7 @@ public class WagonController : MonoBehaviour
 
         if (transform.position == waypoints[1].transform.position)
         {
-            wagonTimer = 5f;
+            wagonTimer = defaultWagonTime;
         }
     }
 
@@ -129,6 +164,8 @@ public class WagonController : MonoBehaviour
 
         carrotsCount++;
 
+        randomCarrots = randomCarrots - carrotsCount;
+
 
     }
 
@@ -139,6 +176,8 @@ public class WagonController : MonoBehaviour
         wagonInventory.Add(TomatoSpot);
 
         tomatoesCount++;
+
+        randomTomatoes = randomTomatoes - tomatoesCount;
 
 
 
@@ -173,11 +212,12 @@ public class WagonController : MonoBehaviour
     {
         if (transform.position == waypoints[0].transform.position)
         {
+
             TextMesh TomatoeText = GameObject.Find("RequiredTomatoes").GetComponent<TextMesh>();
-            TomatoeText.text = randomTomatoes.ToString("F2");
+            TomatoeText.text = randomTomatoes.ToString("F0");
 
             TextMesh CarrotText = GameObject.Find("RequiredCarrots").GetComponent<TextMesh>();
-            CarrotText.text = randomCarrots.ToString("F2");
+            CarrotText.text = randomCarrots.ToString("F0");
         }
 
 
