@@ -277,46 +277,8 @@ public class Player2Control : MonoBehaviour
 
             WagonController wagon = info.collider.GetComponent<WagonController>();
             if (wagon)
-            {
-                if (currently_Holding == InHand.Empty)
-                {
-                    if (wagon.SomethingOnTable())
-                    {
-
-                        GameObject item = wagon.removeTopItem();
-                        //add the script to the tomato and carrots prefab and add it to the table, + delete an extra table
-                        VegControl newplant = item.GetComponent<VegControl>();
-                        if (newplant)
-                        {
-                            switch (newplant.thisIsA)
-                            {
-                                case VegControl.VegType.Carrot:
-
-
-                                    return InHand.Carrots;
-
-                                case VegControl.VegType.Tomatoe:
-
-
-                                    return InHand.Tomatoes;
-                            }
-                        }
-
-
-
-
-                    }
-
-
-
-                }
-
-
-
-
-
-                else
-                {
+            {               
+                
 
 
                     if (currently_Holding == InHand.Carrots)
@@ -333,7 +295,7 @@ public class Player2Control : MonoBehaviour
                         return InHand.Empty;
                     }
 
-                }
+                
             }
 
 

@@ -8,6 +8,8 @@ TagManager:
   - Seeds
   - Player2
   - Player1
+  - Tomato Spot
+  - Carrot Spot
   layers:
   - Default
   - TransparentFX

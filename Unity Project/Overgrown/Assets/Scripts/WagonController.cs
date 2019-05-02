@@ -17,6 +17,9 @@ public class WagonController : MonoBehaviour
     float wagonTimer;
     float defaultWagonTime = 100f;
 
+    bool isTripMade = false;
+    bool hasItems = false;
+
 
 
     [Header("Veggie Controller")]
@@ -55,6 +58,10 @@ public class WagonController : MonoBehaviour
 
         wagonInventory = new List<GameObject>();
 
+    }
+
+    private void UIControllingCommands()
+    {
         randomTomatoes = UnityEngine.Random.Range(1, 30);
 
         randomCarrots = UnityEngine.Random.Range(1, 30);
@@ -83,10 +90,6 @@ public class WagonController : MonoBehaviour
             wagonTimer = 20f;
         }
 
-
-
-
-
     }
 
 
@@ -101,7 +104,7 @@ public class WagonController : MonoBehaviour
             WagonComingIn();
         }
 
-        if (wagonTimer <= 0)
+        if (wagonTimer <= 0 || (randomTomatoes <= tomatoesCount && randomCarrots <= carrotsCount))
         {
             WagonLeaving();
         }
@@ -110,10 +113,9 @@ public class WagonController : MonoBehaviour
 
         RandomGeneratedNumbers();
 
-
-        if (randomTomatoes <= tomatoesCount && randomCarrots <= carrotsCount)
+        if(isTripMade)
         {
-            WagonLeaving();
+            UIControllingCommands();
         }
 
 
@@ -160,6 +162,7 @@ public class WagonController : MonoBehaviour
         //if it goes to the front position(the actual game area)
         if (transform.position == waypoints[0].transform.position)
         {
+            isTripMade = false;
             wagonTimer = wagonTimer - Time.deltaTime;
         }
 
@@ -174,39 +177,48 @@ public class WagonController : MonoBehaviour
             carrotsCount = 0;
             tomatoesCount = 0;
 
+            //changing the values of the required veg
+            isTripMade = true;
 
+            //changing the score text
             TextMesh scoreCount = GameObject.Find("Score").GetComponent<TextMesh>();
             scoreCount.text = totalScore.ToString("F2");
+            
 
-            removingWagonItems();
-
+        }
+        if (transform.position == waypoints[1].transform.position && hasItems)
+        {
+            //  removingWagonItem();
+            removeAll();
         }
     }
 
     internal void putCarrotOn()
     {
+        GameObject carrotSpot = GameObject.FindGameObjectWithTag("Carrot Spot");
 
-
-        CarrotSpot = Instantiate(carrot, transform.position + Vector3.up * wagonInventory.Count, Quaternion.identity, transform);
+        CarrotSpot = Instantiate(carrot, carrotSpot.transform.position + Vector3.up * wagonInventory.Count, Quaternion.identity, carrotSpot.transform);
+        
         wagonInventory.Add(CarrotSpot);
 
         carrotsCount++;
 
         randomCarrots = randomCarrots - 1;
-
+        hasItems = true;
 
     }
 
     internal void putTomatoOn()
     {
+        GameObject tomatoSpot = GameObject.FindGameObjectWithTag("Tomato Spot");
 
-        TomatoSpot = Instantiate(tomatoe, transform.position + Vector3.up * wagonInventory.Count, Quaternion.identity, transform);
+        TomatoSpot = Instantiate(tomatoe, tomatoSpot.transform.position + Vector3.up * wagonInventory.Count, Quaternion.identity, tomatoSpot.transform);
         wagonInventory.Add(TomatoSpot);
 
         tomatoesCount++;
 
         randomTomatoes = randomTomatoes - 1;
-
+        hasItems = true;
 
 
     }
@@ -271,16 +283,19 @@ public class WagonController : MonoBehaviour
 
     }
 
-    private void removingWagonItems()
+    private void removingWagonItem(GameObject item)
     {
-        foreach (GameObject item in wagonInventory)
-        {
-            wagonInventory.Remove(item);
-            Destroy(item);
-        }
+        wagonInventory.Remove(item);
+        Destroy(item);
 
     }
 
-
+    private void removeAll()
+    {
+        for(int i = 0; i < wagonInventory.Count; i++)
+        {
+            removingWagonItem(wagonInventory[i]);
+        }
+    }
 
 }
