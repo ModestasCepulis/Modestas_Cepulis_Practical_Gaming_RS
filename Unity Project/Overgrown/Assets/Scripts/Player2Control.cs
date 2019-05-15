@@ -5,8 +5,8 @@ using UnityEngine;
 public class Player2Control : MonoBehaviour
 {
 
-    
-   internal enum InHand { Empty, Carrot_Seeds, Tomatoe_Seeds, Water, Carrots, Tomatoes, Plucker }
+
+    internal enum InHand { Empty, Carrot_Seeds, Tomatoe_Seeds, Water, Carrots, Tomatoes, Plucker }
 
     internal InHand currently_Holding = InHand.Empty;
     /// <summary>
@@ -35,7 +35,8 @@ public class Player2Control : MonoBehaviour
     GameObject carrots_item_player_2;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
 
 
         Shovel_item_player_2 = Shovel;
@@ -46,9 +47,10 @@ public class Player2Control : MonoBehaviour
         carrots_seeds_item_player_2 = carrot_seeds_item;
 
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
 
 
         if (Input.GetKey(KeyCode.UpArrow))
@@ -275,27 +277,27 @@ public class Player2Control : MonoBehaviour
 
 
 
-            WagonController wagon = info.collider.GetComponent<WagonController>();
+            P2WagonController wagon = info.collider.GetComponent<P2WagonController>();
             if (wagon)
-            {               
-                
+            {
 
 
-                    if (currently_Holding == InHand.Carrots)
-                    {
 
-                        wagon.putCarrotOn();
-                        return InHand.Empty;
-                    }
+                if (currently_Holding == InHand.Carrots)
+                {
 
-                    if (currently_Holding == InHand.Tomatoes)
-                    {
+                    wagon.putCarrotOn();
+                    return InHand.Empty;
+                }
 
-                        wagon.putTomatoOn();
-                        return InHand.Empty;
-                    }
+                if (currently_Holding == InHand.Tomatoes)
+                {
 
-                
+                    wagon.putTomatoOn();
+                    return InHand.Empty;
+                }
+
+
             }
 
 
@@ -305,7 +307,7 @@ public class Player2Control : MonoBehaviour
                 GameObject player1;
 
 
-            if(currently_Holding == InHand.Plucker)
+                if (currently_Holding == InHand.Plucker)
                 {
                     if (player1 = GameObject.FindWithTag("Player1"))
                     {

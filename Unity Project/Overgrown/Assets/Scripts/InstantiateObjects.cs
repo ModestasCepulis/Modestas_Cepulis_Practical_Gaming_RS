@@ -15,13 +15,18 @@ public class InstantiateObjects : MonoBehaviour {
         //tomatoeBarrel = PlantsController.PlantType.Tomatoe;
         //potatoeBarrel = PlantsController.PlantType.Potatoe;
 
-      //potatoe barrel
-        GameObject newSeedBarrel =  Instantiate(barrel, new Vector3(-24.27f, -0.28f, -6.51f), Quaternion.identity);
+        //potatoe barrel
+        GameObject carrotBarrelSpot = GameObject.FindGameObjectWithTag("CarrotBarrell");
+
+
+        GameObject newSeedBarrel =  Instantiate(barrel, carrotBarrelSpot.transform.position, Quaternion.identity);
         BarellController newSeeds = newSeedBarrel.GetComponent<BarellController>();
         newSeeds.YouAreA(BarellController.PlantType.Carrot);
 
         //tomatoe barrell
-        GameObject newSeedBarrel2 = Instantiate(barrel, new Vector3(-23.81f, -0.28f, 0.82f), Quaternion.identity);
+        GameObject tomatoeBarrelSpot = GameObject.FindGameObjectWithTag("TomatoeBarrell");
+
+        GameObject newSeedBarrel2 = Instantiate(barrel, tomatoeBarrelSpot.transform.position, Quaternion.identity);
         BarellController newSeeds2 = newSeedBarrel2.GetComponent<BarellController>();
         newSeeds2.YouAreA(BarellController.PlantType.Tomatoe);
 
@@ -29,15 +34,20 @@ public class InstantiateObjects : MonoBehaviour {
         GameObject newtrashBarrel = Instantiate(trashBarrel, new Vector3(1.02f, -0.3f, 5.92f), Quaternion.identity);
 
         //plucker
-        GameObject newPluckerBarrel = Instantiate(pluckerBarrel, new Vector3(-16.7f, -0.277f, 6.1f), Quaternion.identity);
+        GameObject shovelBarrelSpot = GameObject.FindGameObjectWithTag("ShovelBarrell");
+        GameObject newPluckerBarrel = Instantiate(pluckerBarrel, shovelBarrelSpot.transform.position, Quaternion.identity);
 
         //table
-        GameObject newTable = Instantiate(table, new Vector3(-0.73f, 1.27f, -20.58f), Quaternion.identity);
-        GameObject newTable2 = Instantiate(table, new Vector3(-6.91f, 1.27f, -20.58f), Quaternion.identity);
-        GameObject newTable3 = Instantiate(table, new Vector3(-13.48f, 1.27f, -20.58f), Quaternion.identity);
-        GameObject newTable4 = Instantiate(table, new Vector3(-19.58f, 1.27f, -20.58f), Quaternion.identity);
-        GameObject newTable5 = Instantiate(table, new Vector3(-26.21f, 1.27f, -20.58f), Quaternion.identity);
 
+        GameObject table1 = GameObject.FindGameObjectWithTag("Table1");
+        GameObject table2 = GameObject.FindGameObjectWithTag("Table2");
+        GameObject table3 = GameObject.FindGameObjectWithTag("Table3");
+        GameObject table4 = GameObject.FindGameObjectWithTag("Table4");
+
+        GameObject newTable = Instantiate(table, table1.transform.position, Quaternion.identity);
+        GameObject newTable2 = Instantiate(table, table2.transform.position, Quaternion.identity);
+        GameObject newTable3 = Instantiate(table, table3.transform.position, Quaternion.identity);
+        GameObject newTable4 = Instantiate(table, table4.transform.position, Quaternion.identity);
 
 
     }

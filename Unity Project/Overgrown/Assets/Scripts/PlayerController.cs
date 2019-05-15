@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 
-{   internal enum InHand { Empty, Carrot_Seeds,Tomatoe_Seeds, Water, Carrots, Tomatoes, Plucker}
+{
+    internal enum InHand { Empty, Carrot_Seeds, Tomatoe_Seeds, Water, Carrots, Tomatoes, Plucker }
 
     internal InHand currently_Holding = InHand.Empty;
     /// <summary>
@@ -36,7 +37,8 @@ public class PlayerController : MonoBehaviour
     GameObject carrots_item_player_1;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
 
         Shovel_item_player_1 = Shovel;
         tomatoes_item_player_1 = tomatoes_item;
@@ -116,20 +118,20 @@ public class PlayerController : MonoBehaviour
 
         }
     }
- 
+
 
     private InHand Interact()
     {
-   
-            Ray lookAt = new Ray(transform.position, transform.forward);
-            Debug.DrawRay(lookAt.origin, 15 * lookAt.direction,Color.red,5);
-            RaycastHit info;
 
-            //the Array only works if it is in the range of 'raycastRange'
-            if (Physics.Raycast(lookAt, out info, raycastRange))
-            {
-          
-                BarellController barrell = info.collider.GetComponent<BarellController>();
+        Ray lookAt = new Ray(transform.position, transform.forward);
+        Debug.DrawRay(lookAt.origin, 15 * lookAt.direction, Color.red, 5);
+        RaycastHit info;
+
+        //the Array only works if it is in the range of 'raycastRange'
+        if (Physics.Raycast(lookAt, out info, raycastRange))
+        {
+
+            BarellController barrell = info.collider.GetComponent<BarellController>();
             if (barrell)//if it has the script 'PlantsController' do this
             {
                 if (currently_Holding == InHand.Empty)
@@ -140,89 +142,89 @@ public class PlayerController : MonoBehaviour
                     {
                         case BarellController.PlantType.Carrot:
                             return InHand.Carrot_Seeds;
-                          
+
                         case BarellController.PlantType.Tomatoe:
                             return InHand.Tomatoe_Seeds;
-                           
+
                     }
                 }
             }
-       
-                plotControl plot = info.collider.GetComponent<plotControl>();
-                if (plot)
-                {
-                    //Seed planting
-                    if (currently_Holding == InHand.Carrot_Seeds || currently_Holding == InHand.Tomatoe_Seeds)
-                    {
-                        if (plot.plotIs == plotControl.PlotState.Soil)
-                        {
-                            plot.Interact(currently_Holding);
-                            return InHand.Empty;
-                        }
-                    }
 
-                    //plucker for removing the rubbish (grass)
-                    if(currently_Holding == InHand.Plucker)
+            plotControl plot = info.collider.GetComponent<plotControl>();
+            if (plot)
+            {
+                //Seed planting
+                if (currently_Holding == InHand.Carrot_Seeds || currently_Holding == InHand.Tomatoe_Seeds)
+                {
+                    if (plot.plotIs == plotControl.PlotState.Soil)
                     {
-                        if(plot.plotIs == plotControl.PlotState.Rubbish)
-                        {
-                            plot.Interact(currently_Holding);
+                        plot.Interact(currently_Holding);
+                        return InHand.Empty;
+                    }
+                }
+
+                //plucker for removing the rubbish (grass)
+                if (currently_Holding == InHand.Plucker)
+                {
+                    if (plot.plotIs == plotControl.PlotState.Rubbish)
+                    {
+                        plot.Interact(currently_Holding);
                         return InHand.Plucker;
-                        }
                     }
-
-                    //Once the plant is grown (tomato)
-                    if (currently_Holding == InHand.Empty)
-                    {
-                        if (plot.plotIs == plotControl.PlotState.Tomatoe_Plant)
-                        {
-                            plot.Interact(currently_Holding);
-                            return InHand.Tomatoes;
-                        }
-                    }
-
-                    //Once the plant is grown (carrots) (so that the player could pick up the item)
-                    if (currently_Holding == InHand.Empty)
-                    {
-                        if (plot.plotIs == plotControl.PlotState.Carrot_Plant)
-                        {
-                            plot.Interact(currently_Holding);
-                           return InHand.Carrots;
-                        }
-                    }
-
-
-
-
                 }
-             
-                TrashController trash = info.collider.GetComponent<TrashController>();
-                if (trash)
+
+                //Once the plant is grown (tomato)
+                if (currently_Holding == InHand.Empty)
                 {
+                    if (plot.plotIs == plotControl.PlotState.Tomatoe_Plant)
+                    {
+                        plot.Interact(currently_Holding);
+                        return InHand.Tomatoes;
+                    }
+                }
+
+                //Once the plant is grown (carrots) (so that the player could pick up the item)
+                if (currently_Holding == InHand.Empty)
+                {
+                    if (plot.plotIs == plotControl.PlotState.Carrot_Plant)
+                    {
+                        plot.Interact(currently_Holding);
+                        return InHand.Carrots;
+                    }
+                }
+
+
+
+
+            }
+
+            TrashController trash = info.collider.GetComponent<TrashController>();
+            if (trash)
+            {
                 return InHand.Empty;
-                }
+            }
 
-                PluckerControl plucker = info.collider.GetComponent<PluckerControl>();
-                if (plucker)
+            PluckerControl plucker = info.collider.GetComponent<PluckerControl>();
+            if (plucker)
+            {
+                if (currently_Holding == InHand.Empty)
                 {
-                    if(currently_Holding == InHand.Empty)
-                    {
                     return InHand.Plucker;
-                    }
-
                 }
 
-                TableController table = info.collider.GetComponent<TableController>();
-                if(table)
-                {
-                    if (currently_Holding == InHand.Empty)
-                    {
-                        if (table.SomethingOnTable())
-                        {
+            }
 
-                            GameObject item = table.removeTopItem();
-                            //add the script to the tomato and carrots prefab and add it to the table, + delete an extra table
-                            VegControl newplant = item.GetComponent<VegControl>();
+            TableController table = info.collider.GetComponent<TableController>();
+            if (table)
+            {
+                if (currently_Holding == InHand.Empty)
+                {
+                    if (table.SomethingOnTable())
+                    {
+
+                        GameObject item = table.removeTopItem();
+                        //add the script to the tomato and carrots prefab and add it to the table, + delete an extra table
+                        VegControl newplant = item.GetComponent<VegControl>();
                         if (newplant)
                         {
                             switch (newplant.thisIsA)
@@ -235,51 +237,51 @@ public class PlayerController : MonoBehaviour
                                 case VegControl.VegType.Tomatoe:
 
 
-                                     return InHand.Tomatoes;
+                                    return InHand.Tomatoes;
                             }
                         }
 
 
-                      
-
-                        }
-
 
 
                     }
 
 
 
-
-
-                    else
-                    {
-
-
-                        if (currently_Holding == InHand.Carrots)
-                        {
-
-                            table.putCarrotOn();
-                        return InHand.Empty;
-                    }
-
-                        if (currently_Holding == InHand.Tomatoes)
-                        {
- 
-                            table.putTomatoOn();
-                        return InHand.Empty;
-                    }
-
-                    }
                 }
 
 
 
 
-            WagonController wagon = info.collider.GetComponent<WagonController>();
+
+                else
+                {
+
+
+                    if (currently_Holding == InHand.Carrots)
+                    {
+
+                        table.putCarrotOn();
+                        return InHand.Empty;
+                    }
+
+                    if (currently_Holding == InHand.Tomatoes)
+                    {
+
+                        table.putTomatoOn();
+                        return InHand.Empty;
+                    }
+
+                }
+            }
+
+
+
+
+            P2WagonController wagon = info.collider.GetComponent<P2WagonController>();
             if (wagon)
             {
-                
+
                 {
 
                     if (currently_Holding == InHand.Carrots)
@@ -324,13 +326,13 @@ public class PlayerController : MonoBehaviour
         }
 
 
-       
+
 
 
 
 
         return currently_Holding;
-        
+
     }
 
     /// <summary>
@@ -338,11 +340,11 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void moveForward()
     {
-  
-            transform.position += Vector3.forward * walkingSpeed * Time.deltaTime;
-            transform.rotation = Quaternion.LookRotation(Vector3.forward);
-        
-        
+
+        transform.position += Vector3.forward * walkingSpeed * Time.deltaTime;
+        transform.rotation = Quaternion.LookRotation(Vector3.forward);
+
+
     }
 
     /// <summary>
@@ -350,8 +352,8 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void moveBackwards()
     {
-            transform.position += (Vector3.back * walkingSpeed * Time.deltaTime);
-            transform.rotation = Quaternion.LookRotation(Vector3.back);
+        transform.position += (Vector3.back * walkingSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.LookRotation(Vector3.back);
 
     }
 
@@ -359,18 +361,18 @@ public class PlayerController : MonoBehaviour
     /// Turns left by a certain turning speed
     /// </summary>
     private void moveLeft()
-    {     
-            transform.position+= (Vector3.left * turningSpeed * Time.deltaTime);
-            transform.rotation = Quaternion.LookRotation(Vector3.left);
+    {
+        transform.position += (Vector3.left * turningSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.LookRotation(Vector3.left);
     }
 
     /// <summary>
     /// Turns right by a certain turning speed
     /// </summary>
     private void moveRight()
-    {     
-            transform.position += (Vector3.right * turningSpeed * Time.deltaTime);
-            transform.rotation = Quaternion.LookRotation(Vector3.right);
+    {
+        transform.position += (Vector3.right * turningSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.LookRotation(Vector3.right);
     }
 
 }
